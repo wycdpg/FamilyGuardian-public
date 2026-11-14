@@ -1,0 +1,320 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>我在 · 家人端</title>
+<style>
+*{box-sizing:border-box;margin:0;padding:0;font-family:"Microsoft YaHei",sans-serif;}
+body{background:linear-gradient(180deg,#FDF6EF 0%,#FBE9DB 100%);min-height:100vh;color:#4A3428;padding:14px 14px 88px;}
+.home-head{background:linear-gradient(135deg,#FFF6EC,#FDEBDB);border-radius:22px;padding:16px 18px;margin-top:4px;box-shadow:0 6px 18px rgba(180,120,80,.10);}
+.home-head.warn{background:linear-gradient(135deg,#FDE8E2,#FBD5C9);}
+.home-head .hi{font-size:19px;font-weight:800;}
+.home-head .hi.warn{color:#E8402A;}
+.home-head .sub{font-size:12px;color:#8A6A55;font-weight:600;margin-top:4px;}
+.home-head .date{font-size:11px;color:#A5896F;font-weight:600;margin-top:8px;}
+.pbar{display:flex;gap:8px;margin-top:10px;overflow-x:auto;padding-bottom:2px;}
+.pchip{flex:0 0 auto;background:#fff;border-radius:16px;padding:8px 14px;font-size:12px;font-weight:800;color:#8A6A55;box-shadow:0 3px 10px rgba(180,120,80,.08);}
+.pchip.act{background:#E8653C;color:#fff;}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+.gcard{background:#fff;border-radius:20px;padding:14px 14px;box-shadow:0 4px 14px rgba(180,120,80,.09);}
+.gcard .ico{font-size:18px;}
+.gcard .val{font-size:21px;font-weight:800;margin-top:4px;white-space:nowrap;overflow:hidden;}
+.gcard .val small{font-size:11px;color:#9B7B62;font-weight:600;margin-left:2px;}
+.gcard .label{font-size:12px;color:#9B7B62;margin-top:2px;font-weight:600;}
+.gcard.na .val{color:#B6BFC9;}
+.pillrow{display:grid;grid-template-columns:1fr 1fr;gap:8px;margin-top:10px;}
+.pill{background:#fff;border-radius:18px;padding:11px 14px;box-shadow:0 4px 14px rgba(180,120,80,.08);}
+.pill .k{font-size:11px;color:#9B7B62;font-weight:600;}
+.pill .v{font-size:15px;font-weight:800;margin-top:2px;}
+.pill .v.green{color:#2E9E63;}
+.pill .v.orange{color:#E8653C;}
+.card{background:#fff;border-radius:20px;padding:14px 16px;margin-top:10px;box-shadow:0 4px 14px rgba(180,120,80,.08);}
+.card h3{font-size:14px;font-weight:800;margin-bottom:6px;}
+.row{display:flex;justify-content:space-between;align-items:center;padding:8px 0;border-bottom:1px solid #FFF3E8;}
+.row:last-child{border-bottom:none;}
+.row .k{font-size:12px;color:#8A6A55;font-weight:600;}
+.row .v{font-size:13px;font-weight:700;}
+.row .v.green{color:#2E9E63;}
+.row .v.orange{color:#E8653C;}
+.row .v.red{color:#E8402A;}
+.section{margin-top:16px;font-size:13px;font-weight:800;color:#4A3428;}
+.sdot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#E8653C;margin-right:8px;vertical-align:2px;}
+.fcard{display:flex;align-items:center;gap:12px;background:#fff;border-radius:18px;padding:13px 16px;margin-top:8px;box-shadow:0 4px 14px rgba(180,120,80,.08);}
+.fcard .ico{width:38px;height:38px;border-radius:14px;background:#FFF4E8;display:flex;align-items:center;justify-content:center;font-size:17px;flex-shrink:0;}
+.fcard .tt{font-size:14px;font-weight:800;}
+.fcard .ss{font-size:11px;color:#8A6A55;font-weight:600;margin-top:2px;}
+.fcard .chev{margin-left:auto;color:#C9AE97;font-size:18px;font-weight:800;}
+.tip{margin-top:12px;font-size:11px;color:#A5896F;font-weight:600;line-height:1.7;}
+.headbar{display:flex;align-items:center;gap:10px;margin-top:4px;}
+.backbtn{width:36px;height:36px;border-radius:12px;background:#fff;box-shadow:0 4px 14px rgba(180,120,80,.10);border:0;font-size:16px;font-weight:800;color:#4A3428;}
+.headbar .ht{font-size:18px;font-weight:800;}
+.tin{background:#FFF8F1;border:1px solid #EBD6C3;border-radius:12px;padding:8px 10px;font-size:14px;font-weight:700;color:#4A3428;width:96px;text-align:right;}
+.tin:focus{outline:none;border-color:#E8653C;}
+.tin.wide{width:100%;text-align:left;}
+.savebtn{display:block;width:100%;margin-top:12px;background:linear-gradient(135deg,#E8653C,#E8402A);color:#fff;border:0;border-radius:16px;padding:13px 0;font-size:15px;font-weight:800;}
+#nav{position:fixed;bottom:10px;left:12px;right:12px;background:rgba(255,255,255,.94);display:flex;box-shadow:0 6px 20px rgba(180,120,80,.20);border-radius:22px;backdrop-filter:blur(10px);}
+#nav div{flex:1;text-align:center;font-size:11px;font-weight:700;color:#B79A85;padding:7px 0 9px;border-radius:18px;}
+#nav div .ni{font-size:17px;display:block;}
+#nav div.act{color:#E8653C;}
+#toast{position:fixed;left:50%;bottom:96px;transform:translateX(-50%);background:rgba(74,52,40,.92);color:#fff;padding:8px 16px;border-radius:18px;font-size:12px;font-weight:700;z-index:200;}
+#toast.hide{display:none;}
+</style>
+</head>
+<body>
+<div id="view"></div>
+<nav id="nav">
+<div id="ntab_home" class="act" onclick="tab('home')"><span class="ni">🏠</span>首页</div>
+<div id="ntab_more" onclick="tab('more')"><span class="ni">☰</span>更多</div>
+</nav>
+<div id="toast" class="hide"></div>
+<script>
+window.onerror=function(m,s,l,c){document.title="ERR:"+m+" line:"+l;};
+var LIST=[];   // [{code,name}] 关注的家人
+var DATA={};   // code -> 云端 latest json
+var CUR='';    // 当前查看的家庭码
+var page='home';
+var sub=null;
+var D=null;    // 当前家人的数据（渲染用）
+function _n(v){return (v==null||v<0)?'--':v;}
+function toast(msg){var t=document.getElementById('toast');t.textContent=msg;t.classList.remove('hide');setTimeout(function(){t.classList.add('hide');},2200);}
+function curName(){for(var i=0;i<LIST.length;i++)if(LIST[i].code===CUR)return LIST[i].name||'家人';return '家人';}
+function onCloudUpdate(code,json){
+  try{DATA[code]=(typeof json==='string')?JSON.parse(json):json;if(!CUR)CUR=code;}catch(e){toast('数据解析失败');return;}
+  render();
+}
+function onCodesChanged(){
+  try{LIST=JSON.parse(AndroidBridge.getCodesJson()||'[]');}catch(e){}
+  var ok=false;
+  for(var i=0;i<LIST.length;i++)if(LIST[i].code===CUR)ok=true;
+  if(!ok&&LIST.length>0)CUR=LIST[0].code;
+  sub=null;
+  render();
+}
+function cloudStatus(msg){toast(msg);}
+function connText(){
+  if(!D)return '--';
+  return D.connected===1?'手环已连接':'手环离线';
+}
+function lastAlert(){
+  if(!D||!D.alerts||!D.alerts.length)return null;
+  var a=D.alerts[0];
+  var now=Date.now();
+  if(a.ts&&now-a.ts<12*3600*1000)return a;
+  return null;
+}
+function sleepH(){if(!D||!D.sleep||!(D.sleep.min>0))return null;return Math.round(D.sleep.min/6)/10;}
+function bpText(){if(!D||!(D.bpHigh>0&&D.bpLow>0))return '--';return D.bpHigh+'/'+D.bpLow;}
+function rows(list){var h='';for(var i=0;i<list.length;i++){h+='<div class="row"><span class="k">'+list[i][0]+'</span><span class="v '+(list[i][2]||'')+'">'+list[i][1]+'</span></div>';}return h;}
+function clsRange(v,lo,hi){if(v==null)return '';return (v>=lo&&v<=hi)?'green':'orange';}
+function fcard(ico,tt,ss,onclick){return '<div class="fcard" onclick="'+onclick+'"><div class="ico">'+ico+'</div><div><div class="tt">'+tt+'</div><div class="ss">'+ss+'</div></div><div class="chev">›</div></div>';}
+function head(tt){return '<div class="headbar"><button class="backbtn" onclick="back()">‹</button><div class="ht">'+tt+'</div></div>';}
+function gcard(ico,label,val,unit,na){
+  return '<div class="gcard'+(na?' na':'')+'"><div class="ico">'+ico+'</div><div class="val">'+val+'<small>'+unit+'</small></div><div class="label">'+label+'</div></div>';
+}
+function personBar(){
+  var h='<div class="pbar">';
+  for(var i=0;i<LIST.length;i++){var p=LIST[i];
+    h+='<div class="pchip'+(p.code===CUR?' act':'')+'" onclick="setCur(\''+p.code+'\')">'+(p.name||'家人')+'</div>';}
+  h+='<div class="pchip" onclick="show(\'d_add\')">＋添加</div></div>';
+  return h;
+}
+function setCur(c){CUR=c;sub=null;render();}
+function homeView(){
+  var h='';
+  var la=lastAlert();
+  h+='<div class="home-head'+(la?' warn':'')+'">'
+   +'<div class="hi'+(la?' warn':'')+'">'+(la?'⚠️ '+la.msg:'✅ '+(curName())+'一切正常')+'</div>'
+   +'<div class="sub">'+(la?la.time+' · 已第一时间上传，请尽快联系确认':'异常情况会第一时间上传并提醒你')+'</div>'
+   +'<div class="date">'+connText()+' · 数据时间 '+_n(D?D.time:null)+'</div></div>'
+   +personBar();
+  var hr=D?D.hr:null,spo2=D?D.spo2:null,steps=D?D.steps:null,sh=sleepH();
+  h+='<div class="pillrow">'
+   +'<div class="pill"><div class="k">心率</div><div class="v '+(hr>0?'green':'')+'">'+_n(hr)+' 次/分</div></div>'
+   +'<div class="pill"><div class="k">血氧</div><div class="v '+(spo2>0?'green':'')+'">'+_n(spo2)+'%</div></div>'
+   +'<div class="pill"><div class="k">昨晚睡眠</div><div class="v '+(sh?'green':'orange')+'">'+(sh?sh+' 小时':'待上传')+'</div></div>'
+   +'<div class="pill"><div class="k">今日运动</div><div class="v '+(steps>0?'green':'')+'">'+_n(steps)+' 步</div></div></div>';
+  h+='<div class="grid">'
+   +gcard('🩸','血压',bpText(),'mmHg',!(D&&D.bpHigh>0))
+   +gcard('📈','HRV',_n(D?D.hrv:null),'ms',!(D&&D.hrv>0))
+   +gcard('🌡','体温',_n(D?D.temp:null),'℃',!(D&&D.temp>0))
+   +gcard('🍚','血糖',_n(D?D.sugar:null),'mmol/L',!(D&&D.sugar>0))
+   +gcard('🧘','压力',_n(D?D.stress:null),'',!(D&&D.stress>0))
+   +gcard('🔋','手环电量',_n(D?D.batt:null),'%',!(D&&D.batt>0))+'</div>';
+  var al=(D&&D.alerts)?D.alerts:[];
+  if(al.length){
+    h+='<div class="card"><h3>🔔 最近提醒</h3>';
+    for(var i=0;i<Math.min(al.length,5);i++){h+='<div class="row"><span class="k">'+(al[i].time||'')+'</span><span class="v red">'+(al[i].msg||'')+'</span></div>';}
+    h+='</div>';
+  }
+  var mr=(D&&D.microReports&&D.microReports.length)?D.microReports[0]:null;
+  if(mr){h+='<div class="card"><h3>📋 最近一次微体检 · '+(mr.time||'')+'</h3>'+rows([
+    ['❤️ 心率',_n(mr.hr)+' 次/分',clsRange(mr.hr,60,100)],
+    ['🩸 血氧',_n(mr.spo2)+'%',clsRange(mr.spo2,95,100)],
+    ['🩸 血压',(_n(mr.bph)+'/'+_n(mr.bpl)),(mr.bph>0&&mr.bph<130&&mr.bpl>0&&mr.bpl<85)?'green':'orange'],
+    ['🍚 血糖',_n(mr.sugarMmol)+' mmol/L',clsRange(mr.sugarMmol,3.9,6.1)]
+  ])+'</div>';}
+  h+='<div class="tip">🏠 数据来自'+curName()+'的手环，每3分钟自动更新；异常情况会立刻上传并弹通知。点击顶部名字可切换家人。</div>';
+  return h;
+}
+function moreView(){
+  return '<div class="home-head"><div class="hi">☰ 更多</div><div class="sub">正在查看：'+curName()+'</div><div class="date">'+connText()+' · 数据时间 '+_n(D?D.time:null)+'</div></div>'
+   +personBar()
+   +'<div class="section"><span class="sdot"></span>健康详情</div>'
+   +fcard('📊','其他实时健康信息','心率·血氧·血压·睡眠·运动等全部数据',"show('d_health')")
+   +fcard('📋','微体检报告','手环综合测量：血压血糖血脂体成分等',"show('d_micro')")
+   +'<div class="section"><span class="sdot"></span>家人管理</div>'
+   +personListCards()
+   +'<div class="section"><span class="sdot"></span>操作</div>'
+   +fcard('🔄','立即刷新','手动拉取全部家人最新数据',"refreshNow()")
+   +fcard('⌚','设备与阈值','当前家人：'+curName()+' 的告警阈值设置',"show('d_device')")
+   +'<div class="tip">⚙️ 健康数据由手环自动采集；告警阈值支持远程设置，保存后自动同步到对应老人的手机。</div>';
+}
+function personListCards(){
+  var h='';
+  for(var i=0;i<LIST.length;i++){var p=LIST[i];
+    h+='<div class="fcard"><div class="ico">👤</div><div><div class="tt">'+(p.name||'家人')+'</div><div class="ss">'+p.code+'</div></div><div class="chev" onclick="delPerson(\''+p.code+'\')">✕</div></div>';}
+  h+=fcard('➕','添加家人','输入称呼和家庭码',"show('d_add')");
+  return h;
+}
+function delPerson(code){if(window.AndroidBridge&&AndroidBridge.removeCode)AndroidBridge.removeCode(code);}
+function addView(){
+  return head('➕ 添加家人')
+   +'<div class="card"><h3>家人信息</h3>'
+   +'<div class="row"><span class="k">称呼（如：妈妈 / 爸爸）</span></div>'
+   +'<input id="ap_name" class="tin wide" placeholder="例如：妈妈">'
+   +'<div class="row"><span class="k">家庭码</span></div>'
+   +'<input id="ap_code" class="tin wide" placeholder="例如：wozai-1011">'
+   +'<button class="savebtn" onclick="saveAddPerson()">保存并开始关注</button></div>'
+   +'<div class="tip">每位老人一个独立家庭码（老人手机首次打开 APP 时选择"老人端"并填同一个码）。添加后每3分钟自动刷新数据。</div>';
+}
+function saveAddPerson(){
+  var n=document.getElementById('ap_name').value,c=document.getElementById('ap_code').value;
+  if(!(c||'').trim()||c.trim().length<3){toast('请输入正确的家庭码');return;}
+  if(window.AndroidBridge&&AndroidBridge.addCode){AndroidBridge.addCode(n,c);}
+  else toast('请更新APP');
+}
+function healthView(){
+  var s=(D&&D.sleep)?D.sleep:null;
+  return head('📊 其他实时健康信息')
+   +'<div class="card"><h3>实时指标（'+curName()+'）</h3>'+rows([
+     ['❤️ 心率',_n(D?D.hr:null)+' 次/分',''],
+     ['🩸 血氧',_n(D?D.spo2:null)+'%',''],
+     ['🩸 血压',bpText()+' mmHg',''],
+     ['📈 HRV',_n(D?D.hrv:null)+' ms',''],
+     ['🌡 体温',_n(D?D.temp:null)+' ℃',''],
+     ['🍚 血糖',_n(D?D.sugar:null)+' mmol/L',''],
+     ['🧘 压力',_n(D?D.stress:null),'']
+   ])+'</div>'
+   +'<div class="card"><h3>🌙 睡眠</h3>'+rows([
+     ['睡眠时长',(s&&s.min>0)?(Math.round(s.min/6)/10+' 小时'):'--',''],
+     ['深睡',(s&&s.deep>0)?(s.deep+' 分钟'):'--',''],
+     ['浅睡',(s&&s.light>0)?(s.light+' 分钟'):'--',''],
+     ['快速眼动',(s&&s.rem>0)?(s.rem+' 分钟'):'--','']
+   ])+'</div>'
+   +'<div class="card"><h3>🚶 今日运动</h3>'+rows([
+     ['步数',_n(D?D.steps:null)+' 步',''],
+     ['消耗',_n(D?D.kcal:null)+' 千卡',''],
+     ['距离',_n(D?D.dis:null)+' 公里','']
+   ])+'</div>'
+   +'<div class="tip">以上数据与'+curName()+'的手机实时同步，异常情况会自动推送提醒。</div>';
+}
+function deviceView(){
+  var th=(D&&D.thresh)?D.thresh:{};
+  var cur={spo2:90,hrHigh:140,hrLow:45,sugarLow:3.9,fallG:2.5};
+  try{
+    var cfg=JSON.parse((window.AndroidBridge&&AndroidBridge.getConfigJson)?(AndroidBridge.getConfigJson(CUR)||''):'');
+    if(cfg&&cfg.spo2){cur.spo2=cfg.spo2;cur.hrHigh=cfg.hrHigh;cur.hrLow=cfg.hrLow;if(cfg.sugarLow)cur.sugarLow=cfg.sugarLow;if(cfg.fallG)cur.fallG=cfg.fallG;}
+  }catch(e){}
+  var v=function(a,b){a=Number(a);return isNaN(a)?b:a;};
+  var f=function(id,label,unit,vv,min,max,step){return '<div class="row"><span class="k">'+label+'</span><span class="v" style="display:flex;align-items:center;gap:6px;"><input id="'+id+'" class="tin" type="number" step="'+step+'" min="'+min+'" max="'+max+'" value="'+vv+'"><small style="color:#9B7B62;font-weight:600;">'+unit+'</small></span></div>';};
+  return head('⌚ 设备与阈值（'+curName()+'）')
+   +'<div class="card"><h3>手环状态</h3>'+rows([
+     ['手环连接',connText(),(D&&D.connected===1)?'green':'orange'],
+     ['手环电量',_n(D?D.batt:null)+'%',''],
+     ['数据时间',_n(D?D.time:null),'']
+   ])+'</div>'
+   +'<div class="card"><h3>⚙️ 告警阈值（远程设置）</h3>'
+   +f('th_spo2','血氧低于','% 时告警',v(th.spo2,cur.spo2),70,99,1)
+   +f('th_hrhigh','心率高于','次/分 时告警',v(th.hrHigh,cur.hrHigh),80,220,1)
+   +f('th_hrlow','心率低于','次/分 时告警',v(th.hrLow,cur.hrLow),30,90,1)
+   +f('th_sugar','血糖低于','mmol/L 时告警',v(th.sugarLow,cur.sugarLow).toFixed(1),2.0,6.0,0.1)
+   +f('th_fall','摔倒冲击','G 时预警',v(th.fallG,cur.fallG).toFixed(1),1.5,5.0,0.1)
+   +'<button class="savebtn" onclick="saveThreshFamily()">保存并同步到'+curName()+'的手机</button></div>'
+   +'<div class="tip">保存后自动上传云端，'+curName()+'的手机 3 分钟内拉取并立即生效；异常达到阈值会立刻上传并提醒你。</div>';
+}
+function saveThreshFamily(){
+  var sp=parseInt(document.getElementById('th_spo2').value),hh=parseInt(document.getElementById('th_hrhigh').value),hl=parseInt(document.getElementById('th_hrlow').value),sg=parseFloat(document.getElementById('th_sugar').value),fg=parseFloat(document.getElementById('th_fall').value);
+  if(!(sp>=70&&sp<=99)){toast('血氧下限请填70~99');return;}
+  if(!(hh>=80&&hh<=220)){toast('心率上限请填80~220');return;}
+  if(!(hl>=30&&hl<=90)){toast('心率下限请填30~90');return;}
+  if(hl>=hh){toast('心率下限要小于心率上限');return;}
+  if(!(sg>=2.0&&sg<=6.0)){toast('血糖下限请填2.0~6.0');return;}
+  if(!(fg>=1.5&&fg<=5.0)){toast('摔倒阈值请填1.5~5.0');return;}
+  if(!(window.AndroidBridge&&AndroidBridge.saveThresholds)){toast('请更新APP后再试');return;}
+  toast('正在保存到云端...');
+  AndroidBridge.saveThresholds(CUR,sp,hh,hl,sg,fg);
+}
+function microView(){
+  var list=(D&&D.microReports)?D.microReports:[];
+  if(!list.length)return head('📋 微体检报告')+'<div class="card"><h3>什么是微体检</h3><div class="tip">手环一轮综合检测：心率、血氧、压力、血糖、血压、HRV等，约1~2分钟。</div></div><div class="tip">还没有微体检记录。在老人端点"微体检报告"开始测量后，报告会自动同步到这里。</div>';
+  var h=head('📋 微体检报告（'+list.length+'次）');
+  for(var i=0;i<list.length;i++){
+    var r=list[i];
+    h+='<div class="card"><h3>⏱ '+(r.time||'')+'</h3>'+rows([
+      ['❤️ 心率',_n(r.hr)+' 次/分',clsRange(r.hr,60,100)],
+      ['🩸 血氧',_n(r.spo2)+'%',clsRange(r.spo2,95,100)],
+      ['🧘 压力',_n(r.stress),clsRange(r.stress,0,59)],
+      ['🍚 血糖',_n(r.sugarMmol)+' mmol/L',clsRange(r.sugarMmol,3.9,6.1)],
+      ['🌡 体温',_n(r.temp)+' ℃',clsRange(r.temp,35.5,37.5)],
+      ['🩸 血压',_n(r.bph)+'/'+_n(r.bpl),(r.bph>0&&r.bph<130&&r.bpl>0&&r.bpl<85)?'green':'orange'],
+      ['📈 HRV',_n(r.hrv)+' ms','']
+    ])+'</div>';
+    if(r.uricAcid!=null){h+='<div class="card"><h3>🧪 血液健康</h3>'+rows([
+      ['尿酸',_n(r.uricAcid)+' μmol/L',clsRange(r.uricAcid,150,430)],
+      ['总胆固醇',_n(r.tcho)+' mmol/L',clsRange(r.tcho,2.8,5.7)],
+      ['甘油三酯',_n(r.tag)+' mmol/L',clsRange(r.tag,0.45,1.7)],
+      ['高密度脂蛋白',_n(r.hdl)+' mmol/L',''],
+      ['低密度脂蛋白',_n(r.ldl)+' mmol/L','']
+    ])+'</div>';}
+    if(r.bmi!=null){h+='<div class="card"><h3>⚖️ 体成分</h3>'+rows([
+      ['BMI',_n(r.bmi),''],['体脂率',_n(r.bfr)+'%',''],['肌肉量',_n(r.muscle)+' kg',''],['水分',_n(r.water)+'%',''],['骨量',_n(r.bone)+' kg',''],['蛋白质',_n(r.protein)+'%',''],['基础代谢',_n(r.bmr)+' 千卡','']
+    ])+'</div>';}
+    if(r.emotion!=null){h+='<div class="card"><h3>💧 情绪与皮肤电</h3>'+rows([
+      ['情绪',_n(r.emotion),''],['皮肤水分',_n(r.skinWater),''],['抑郁风险',_n(r.depression),''],['交感神经活跃度',_n(r.sympa),''],['皮质醇',_n(r.cortisol),'']
+    ])+'</div>';}
+  }
+  return h+'<div class="tip">报告由老人端手动测量，测完自动同步到这里（最多保留10次）。</div>';
+}
+function render(){
+  var v=document.getElementById('view');
+  if(!v)return;
+  D=DATA[CUR]||null;
+  if(!sub&&page==='home'&&LIST.length===0){v.innerHTML=addView();return;}
+  if(sub==='d_add')v.innerHTML=addView();
+  else if(sub==='d_health')v.innerHTML=healthView();
+  else if(sub==='d_micro')v.innerHTML=microView();
+  else if(sub==='d_device')v.innerHTML=deviceView();
+  else if(page==='home')v.innerHTML=homeView();
+  else v.innerHTML=moreView();
+  document.getElementById('ntab_home').className=(page==='home'&&!sub)?'act':'';
+  document.getElementById('ntab_more').className=((page==='more')||sub)?'act':'';
+  window.scrollTo(0,0);
+}
+function tab(id){page=id;sub=null;render();}
+function show(id){sub=id;render();}
+function back(){sub=null;render();}
+function refreshNow(){toast('正在刷新全部家人数据...');if(window.AndroidBridge&&AndroidBridge.refreshNow)AndroidBridge.refreshNow();}
+window.onload=function(){
+  try{
+    if(window.AndroidBridge&&AndroidBridge.getCodesJson){
+      LIST=JSON.parse(AndroidBridge.getCodesJson()||'[]');
+      for(var i=0;i<LIST.length;i++){var c=LIST[i].code;var s=AndroidBridge.getCachedJson(c);if(s&&s.length>0){try{DATA[c]=JSON.parse(s);}catch(e){}}}
+      if(LIST.length>0)CUR=LIST[0].code;
+    }
+  }catch(e){}
+  render();
+};
+</script>
+</body>
+</html>

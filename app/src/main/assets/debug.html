@@ -1,0 +1,19 @@
+<!DOCTYPE html><html><head><meta charset="utf-8"><style>body{font:12px Consolas;background:#111;color:#0f0;padding:8px;white-space:pre-wrap;}</style></head>
+<body>running...
+<iframe id="f" src="app.html?s=family" style="width:420px;height:1400px;border:0"></iframe>
+<script>
+document.getElementById('f').onload=function(){
+ setTimeout(function(){
+  var d=document.getElementById('f').contentDocument;
+  var out=['scrollWidth='+d.documentElement.scrollWidth+' clientWidth='+d.documentElement.clientWidth];
+  var bad=[];
+  d.querySelectorAll('*').forEach(function(el){
+    var r=el.getBoundingClientRect();
+    if(r.right>421||r.width>421){bad.push(Math.round(r.right)+'x'+Math.round(r.width)+' '+el.tagName+'.'+(el.className||'')+' '+(el.textContent||'').slice(0,24).replace(/\s+/g,' '));}
+  });
+  out.push('bad count='+bad.length);
+  out=out.concat(bad.slice(0,40));
+  document.body.textContent=out.join('\n');
+ },1200);
+};
+</script></body></html>

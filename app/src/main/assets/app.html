@@ -1,0 +1,670 @@
+<!DOCTYPE html>
+<html><head><meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>我在</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:"Microsoft YaHei","PingFang SC",sans-serif;-webkit-tap-highlight-color:transparent;}
+body{background:linear-gradient(180deg,#FFF4E8 0%,#FFE8D6 100%);min-height:100vh;color:#4A3428;}
+#view{padding:26px 20px 110px;}
+.nav{display:flex;align-items:center;justify-content:space-between;margin-top:6px;}
+.nav .back{font-size:26px;width:34px;}
+.nav .title{font-size:24px;font-weight:800;}
+.hero{background:#fff;border-radius:26px;padding:22px;margin-top:14px;box-shadow:0 6px 18px rgba(180,120,80,.12);text-align:center;}
+.hero .v{font-size:52px;font-weight:800;}
+.hero .v small{font-size:20px;color:#9B7B62;font-weight:700;}
+.hero .lab{font-size:16px;color:#9B7B62;font-weight:700;margin-top:4px;}
+.badge{display:inline-block;margin-top:10px;font-size:14px;font-weight:800;padding:6px 16px;border-radius:999px;}
+.ok{background:#E4F7EC;color:#2E9E63;}.warn{background:#FFE9E4;color:#E8402A;}.info{background:#FFF1E0;color:#B06A2C;}
+.card{background:#fff;border-radius:24px;padding:18px;margin-top:14px;box-shadow:0 4px 14px rgba(180,120,80,.10);}
+.card h3{font-size:18px;font-weight:800;display:flex;justify-content:space-between;align-items:center;}
+.card h3 span{font-size:13px;color:#9B7B62;font-weight:700;}
+.row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid #F6EADF;}
+.row:last-child{border-bottom:none;}
+.row .k{font-size:16px;font-weight:700;}
+.row .v{font-size:16px;font-weight:800;text-align:right;}
+.row .v .sub{font-size:13px;color:#9B7B62;font-weight:700;}
+.green{color:#2E9E63;}.red{color:#E8402A;}.orange{color:#B06A2C;}
+.bars{display:flex;align-items:flex-end;gap:8px;height:88px;margin-top:14px;}
+.bar{flex:1;background:#FFD9C4;border-radius:8px 8px 4px 4px;position:relative;min-width:0;}
+.bar.hot{background:#FF9B7A;}
+.bar span{position:absolute;top:-20px;left:0;right:0;text-align:center;font-size:11px;color:#9B7B62;font-weight:700;}
+.days{display:flex;gap:8px;margin-top:6px;}
+.days div{flex:1;text-align:center;font-size:11px;color:#B79A85;font-weight:700;}
+.tip{background:#fff;border-radius:20px;padding:14px 16px;margin-top:14px;font-size:14px;line-height:1.6;color:#8A6A55;font-weight:600;box-shadow:0 4px 14px rgba(180,120,80,.08);}
+.bigbtn{margin-top:16px;background:linear-gradient(135deg,#FF8A5C,#F76B3C);border-radius:24px;padding:18px;text-align:center;color:#fff;font-size:22px;font-weight:800;letter-spacing:2px;box-shadow:0 8px 20px rgba(247,107,60,.30);}
+.bigbtn small{display:block;font-size:13px;font-weight:600;opacity:.92;margin-top:4px;letter-spacing:0;}
+.grp{margin-top:22px;font-size:18px;font-weight:800;}
+.frow{display:flex;justify-content:space-between;align-items:center;background:#fff;border-radius:22px;padding:18px 20px;margin-top:10px;box-shadow:0 4px 14px rgba(180,120,80,.10);}
+.frow .l{display:flex;align-items:center;gap:12px;font-size:17px;font-weight:800;}
+.frow .r{font-size:14px;font-weight:800;text-align:right;}
+.frow .chev{color:#C9AE9B;font-size:20px;margin-left:6px;}
+.banner{background:linear-gradient(135deg,#3FBF7F,#2E9E63);border-radius:26px;padding:20px;color:#fff;margin-top:14px;box-shadow:0 6px 18px rgba(46,158,99,.25);}
+.banner .t{font-size:24px;font-weight:800;}
+.banner .s{font-size:14px;margin-top:6px;opacity:.92;font-weight:600;}
+.grid{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:14px;}
+.gcard{background:#fff;border-radius:26px;padding:20px 18px;box-shadow:0 6px 18px rgba(180,120,80,.12);}
+.gcard .ico{font-size:26px;}
+.gcard .val{font-size:33px;font-weight:800;margin-top:6px;white-space:nowrap;overflow:hidden;}
+.gcard .val small{font-size:15px;color:#9B7B62;font-weight:700;margin-left:2px;}
+.gcard .label{font-size:15px;color:#9B7B62;margin-top:4px;font-weight:700;}
+.home-head{background:linear-gradient(135deg,#FFF3E6,#FFE7D6);border-radius:28px;padding:22px 20px;margin-top:16px;box-shadow:0 10px 26px rgba(180,120,80,.14);}
+.home-head .hi{font-size:30px;font-weight:800;}
+.home-head .sub{font-size:15px;color:#8A6A55;font-weight:700;margin-top:6px;}
+.home-head .date{font-size:13px;color:#9B7B62;font-weight:700;margin-top:10px;}
+.pillrow{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:12px;}
+.pill{background:#fff;border-radius:22px;padding:14px 16px;box-shadow:0 6px 18px rgba(180,120,80,.10);}
+.pill .k{font-size:12px;color:#9B7B62;font-weight:700;}
+.pill .v{font-size:17px;font-weight:800;margin-top:2px;}
+.section{margin-top:20px;font-size:15px;font-weight:800;color:#8A6A55;letter-spacing:.4px;}
+.fcard{display:flex;align-items:center;gap:14px;background:#fff;border-radius:24px;padding:18px;margin-top:10px;box-shadow:0 6px 18px rgba(180,120,80,.10);}
+.fcard .ico{width:46px;height:46px;border-radius:18px;display:flex;align-items:center;justify-content:center;font-size:22px;background:#FFF3E6;}
+.fcard .tt{font-size:17px;font-weight:800;}
+.fcard .ss{font-size:13px;color:#8A6A55;margin-top:2px;font-weight:700;}
+.fcard .arrow{margin-left:auto;font-size:20px;color:#C9AE9B;}
+.fcard.accent-green .ico{background:#E9F7EF;}
+.fcard.accent-orange .ico{background:#FFF1E0;}
+.fcard.accent-red .ico{background:#FFEDE7;}
+.notice{border-radius:24px;padding:18px;background:#FFF8EF;margin-top:12px;box-shadow:0 6px 18px rgba(180,120,80,.08);}
+.notice .t{font-size:17px;font-weight:800;}
+.notice .s{font-size:14px;color:#8A6A55;margin-top:6px;line-height:1.6;font-weight:700;}
+.sos{margin-top:16px;background:linear-gradient(180deg,#FF6B4A,#E8402A);border-radius:30px;padding:24px;text-align:center;color:#fff;font-size:26px;font-weight:800;letter-spacing:6px;box-shadow:0 10px 26px rgba(232,64,42,.35);}
+.sos small{display:block;font-size:14px;font-weight:600;letter-spacing:1px;opacity:.9;margin-top:6px;}
+#nav{position:fixed;bottom:0;left:0;right:0;background:#fff;display:flex;box-shadow:0 -4px 18px rgba(180,120,80,.12);padding:10px 0 18px;z-index:50;}
+#nav div{flex:1;text-align:center;font-size:13px;font-weight:800;color:#B79A85;}
+#nav div .ni{font-size:22px;display:block;}
+#nav div.act{color:#E8653C;}
+#nav{bottom:12px;left:14px;right:14px;border-radius:28px;background:rgba(255,255,255,.86);backdrop-filter:blur(14px);-webkit-backdrop-filter:blur(14px);box-shadow:0 16px 34px rgba(180,120,80,.18);padding:12px 8px 14px;}
+#nav div{position:relative;padding:4px 0 6px;border-radius:18px;}
+#nav div.act:before{content:'';position:absolute;left:50%;transform:translateX(-50%);bottom:-4px;width:18px;height:4px;border-radius:999px;background:#E8653C;opacity:.8;}
+#view{padding-bottom:130px;}
+body.role-none #nav{display:none;}
+body.role-elder #ntab_family{display:none;}
+body.role-child #ntab_home,body.role-child #ntab_funcs{display:none;}
+.rolehead{margin-top:8px;text-align:center;}
+.rolehead .k{font-size:22px;font-weight:800;}
+.rolehead .s{font-size:15px;color:#8A6A55;margin-top:6px;}
+.rolegrid{display:grid;gap:14px;margin-top:20px;}
+.rolecard{background:#fff;border-radius:28px;padding:26px 20px;text-align:center;box-shadow:0 8px 20px rgba(180,120,80,.12);}
+.rolecard .ico{font-size:38px;}
+.rolecard h3{margin-top:8px;font-size:20px;font-weight:800;}
+.rolecard p{margin-top:6px;font-size:14px;line-height:1.5;color:#8A6A55;}
+.rolecard.elder{border:2px solid #FFD9C4;}
+.rolecard.child{border:2px solid #E4F7EC;}
+.rolecard:active{transform:scale(.98);}
+.overlay{position:fixed;inset:0;background:rgba(74,52,40,.55);display:flex;align-items:center;justify-content:center;z-index:99;}
+.obox{background:#fff;border-radius:26px;padding:34px 30px;width:280px;text-align:center;}
+.obox .sp{width:46px;height:46px;border:5px solid #FFE0CE;border-top-color:#F76B3C;border-radius:50%;margin:0 auto 16px;animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg);}}
+.obox .ot{font-size:19px;font-weight:800;}
+#toast{position:fixed;bottom:120px;left:50%;transform:translateX(-50%);background:#4A3428;color:#fff;font-size:15px;font-weight:700;padding:12px 22px;border-radius:999px;z-index:100;max-width:86%;text-align:center;}
+.hide{display:none !important;}
+.sospage{background:linear-gradient(180deg,#E8402A,#C4271A);position:fixed;inset:0;color:#fff;padding:60px 24px;z-index:80;text-align:center;}
+.sospage .big{font-size:34px;font-weight:800;margin-top:40px;}
+.sospage .cnt{font-size:70px;font-weight:800;margin:30px 0;}
+.sospage .cancel{background:#fff;color:#E8402A;border-radius:24px;padding:18px;font-size:20px;font-weight:800;margin-top:30px;}
+.sospage .sub{font-size:16px;opacity:.9;line-height:1.8;font-weight:600;margin-top:10px;}
+.chip{display:inline-flex;align-items:center;gap:8px;background:#fff;border-radius:999px;padding:10px 18px;margin-top:12px;box-shadow:0 4px 14px rgba(180,120,80,.15);font-size:15px;color:#4A3428;font-weight:700;}
+.dot{width:10px;height:10px;border-radius:50%;background:#3FBF7F;display:inline-block;}
+.hello h1{font-size:32px;font-weight:800;margin-top:16px;}
+.hello p{font-size:16px;color:#9B7B62;margin-top:6px;font-weight:600;}
+.para{font-size:15px;line-height:1.85;color:#5C4636;font-weight:600;margin-top:10px;}
+.para b{color:#4A3428;}
+.lc{width:100%;height:96px;margin-top:10px;}
+.legend{display:flex;gap:16px;margin-top:8px;font-size:13px;font-weight:700;color:#8A6A55;flex-wrap:wrap;}
+.legend i{display:inline-block;width:12px;height:12px;border-radius:3px;margin-right:5px;vertical-align:-1px;}
+.stacked{display:flex;height:26px;border-radius:13px;overflow:hidden;margin-top:12px;}
+.stacked div{height:100%;}
+.tl{display:flex;height:30px;border-radius:15px;overflow:hidden;margin-top:12px;position:relative;background:#F6EADF;}
+.tl div{height:100%;}
+.tlt{display:flex;justify-content:space-between;font-size:13px;color:#9B7B62;font-weight:700;margin-top:6px;}
+.o2{display:inline-flex;align-items:center;justify-content:center;width:28px;height:28px;border-radius:9px;background:linear-gradient(135deg,#FF8A5C,#E8402A);color:#fff;font-weight:900;font-size:14px;vertical-align:-5px;box-shadow:0 3px 8px rgba(232,64,42,.35);text-shadow:0 1px 1px rgba(120,20,0,.35);}
+.inp{width:100%;padding:12px 14px;border:1.5px solid #EADFD5;border-radius:14px;font-size:16px;margin-bottom:10px;background:#FFFDFA;color:#4A3428;outline:none;box-sizing:border-box;}
+.mbtn{background:linear-gradient(135deg,#FF8A5C,#F76B3C);color:#fff;border-radius:18px;padding:14px;text-align:center;font-size:18px;font-weight:800;}
+.del{color:#E8402A;font-weight:800;}
+.taxis{display:flex;justify-content:space-between;font-size:11px;color:#B79A85;font-weight:700;margin-top:4px;}
+
+.lcwrap{position:relative;padding:0 2px;}
+.lctag{position:absolute;transform:translate(-50%,-150%);background:#FFFDFA;border:1px solid #EADFD5;border-radius:8px;font-size:10px;padding:1px 5px;color:#7A5C44;white-space:nowrap;box-shadow:0 1px 2px rgba(0,0,0,.06);font-weight:800;}
+.lctag.low{transform:translate(-50%,40%);}
+.ytag{position:absolute;left:4px;font-size:10px;color:#B79A85;font-weight:700;}
+.ytag.top{top:0;}.ytag.bot{bottom:27px;}
+.gradwrap{position:relative;padding-top:18px;}
+.gradbar{display:flex;height:14px;border-radius:7px;overflow:hidden;}
+.gradmark{position:absolute;top:0;transform:translateX(-50%);font-size:11px;font-weight:900;color:#4A3428;background:#FFFDFA;border:1.5px solid #EADFD5;border-radius:8px;padding:0 6px;}
+.gradlabs{display:flex;justify-content:space-between;font-size:10px;color:#B79A85;margin-top:6px;font-weight:700;}
+
+.fgrid{display:flex;gap:8px;align-items:flex-end;}
+.fgrid>div{flex:1;min-width:0;}
+.fgrid .inp{padding-left:8px;padding-right:8px;font-size:14px;height:40px;}
+.mini{font-size:12px;color:#776C60;margin-bottom:5px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;}
+
+.flow{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px;}
+.flow .step{background:#FFF8EF;border:1px solid #F6E2D1;border-radius:18px;padding:10px 8px;text-align:center;}
+.flow .step .ico{font-size:20px;}
+.flow .step .tt{font-size:13px;font-weight:800;color:#4A3428;margin-top:3px;}
+.flow .step .st{font-size:11px;color:#8A6A55;font-weight:700;margin-top:2px;line-height:1.3;}
+.flow .step.warn{background:#FFEDE7;border-color:#FFD3C7;}
+.flow .step.ok{background:#EAF8F0;border-color:#CFEEDD;}
+.medform .inp{margin-top:6px;}
+
+.fallbox{position:fixed;inset:0;background:linear-gradient(180deg,#FFF1E0,#FFE3D0);z-index:110;display:flex;flex-direction:column;justify-content:center;align-items:center;padding:28px;text-align:center;}
+.fallbox .ftitle{font-size:28px;font-weight:800;color:#E8402A;}
+.fallbox .fcnt{font-size:76px;font-weight:800;color:#4A3428;margin-top:8px;}
+.fallbox .fsub{font-size:17px;font-weight:700;color:#8A6A55;line-height:1.6;}
+.fallbtn{display:block;width:100%;max-width:360px;padding:16px;border-radius:24px;font-size:20px;font-weight:800;margin-top:12px;color:#fff;background:#2E9E63;border:0;box-shadow:0 8px 20px rgba(46,158,99,.25);}
+.fallbtn.warn{background:#B06A2C;box-shadow:0 8px 20px rgba(176,106,44,.25);}
+.fallbtn.help{background:#E8402A;box-shadow:0 8px 20px rgba(232,64,42,.30);}
+.fallbtn:last-child{margin-bottom:0;}
+.fallstat{margin-top:14px;font-size:14px;color:#8A6A55;font-weight:700;}
+<style>
+  .card{background:#fff;border-radius:26px;padding:20px;margin-top:14px;box-shadow:0 8px 20px rgba(180,120,80,.10);}
+  .cardtitle{display:flex;align-items:center;gap:10px;font-size:16px;font-weight:800;color:#4A3428;}
+  .cardtitle .ico{width:36px;height:36px;border-radius:12px;background:#FFF3E6;display:flex;align-items:center;justify-content:center;font-size:18px;}
+  .cardtitle .sub{font-size:12px;color:#8A6A55;font-weight:700;margin-left:auto;}
+  .sdot{display:inline-block;width:6px;height:6px;border-radius:50%;background:#E8653C;margin-right:8px;vertical-align:2px;}
+  </style></head></head>
+<body>
+<div id="view"></div>
+<nav id="nav">
+<div id="ntab_home" class="act" onclick="tab('home')"><span class="ni">🏠</span>首页</div>
+<div id="ntab_funcs" onclick="tab('funcs')"><span class="ni">📋</span>功能</div>
+<div id="ntab_family" onclick="tab('family')"><span class="ni">👨‍👩‍👧</span>家人</div>
+<div id="ntab_settings" onclick="tab('settings')"><span class="ni">⚙️</span>设置</div>
+</nav>
+<div id="overlay" class="overlay hide"><div class="obox"><div class="sp"></div><div class="ot" id="ovt">正在检测…</div></div></div>
+<div id="toast" class="hide"></div>
+<div id="fallbox" class="fallbox hide"><div class="ftitle">⚠️ 检测到疑似摔倒</div><div class="fcnt" id="fallcnt">30</div><div class="fsub">你能自己起来吗？<br/>请在30秒内点一下确认</div><button class="fallbtn" onclick="fallConfirm()">我还可以</button><button class="fallbtn help" onclick="fallHelp()">我需要帮助</button><div class="fallstat" id="fallstat">手环已震动；30秒没确认自动短信+打电话</div></div>
+<script>window.onerror=function(m,s,l,c){document.title="ERR:"+m+" line:"+l+" col:"+c;};
+var stack=['home'];
+var S={};
+var D={temp:null,accX:null,accY:null,accZ:null,accG:null,connected:false,hr:null,spo2:null,steps:null,batt:null,bpHigh:null,bpLow:null,hrv:null,dis:null,kcal:null,sleepMin:null,sleepDeep:null,sleepLight:null,sleepWake:null,sleepDown:null,sleepUp:null,upd:null,seq:[],hist:[],recs:[],hrvUnsup:false,sugar:null,stress:null};
+function _n(v){return v==null?'--':v;}
+function hrText(){return _n(D.hr);}
+function spo2Text(){return _n(D.spo2);}
+function stepsText(){return _n(D.steps);}
+function battText(){return D.batt==null?'--':D.batt+'%';}
+function connText(){return D.connected?'手环已连接':'手环未连接';}
+function greet(){var h=new Date().getHours();if(h<5)return '晚安';if(h<9)return '早上好';if(h<12)return '上午好';if(h<14)return '中午好';if(h<18)return '下午好';return '晚上好';}
+function refresh(){var id=stack[stack.length-1];var v=document.getElementById('view');if(!v||!S[id])return;var el=document.activeElement;if(el&&(el.tagName==='INPUT'||el.tagName==='SELECT'||el.tagName==='TEXTAREA'))return;v.innerHTML=S[id]();}
+function setHr(v){D.hr=v;refresh();}
+function setSpo2(v){D.spo2=v;refresh();}
+function setSteps(v){D.steps=v;refresh();}
+function setBatt(v){D.batt=v;refresh();}
+function setConn(on){D.connected=(on===true||on==='true');refresh();}
+function setBp(h,l){D.bpHigh=(h==null||h<0)?null:h;D.bpLow=(l==null||l<0)?null:l;refresh();}
+function setHrv(v){D.hrv=(v==null||v<0)?null:v;if(v!=null){var d=new Date();var t=('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2)+' '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);try{D.seq=D.seq||[];D.seq.push({t:t,hrv:v});if(D.seq.length>300)D.seq=D.seq.slice(-300);}catch(e){}try{D.recs=D.recs||[];var last=D.recs[D.recs.length-1];if(!last||last.t!==t||last.hrv!==v)D.recs.push({t:t,hrv:v});}catch(e){}}refresh();}
+function setDis(v){D.dis=(v==null||v<0)?null:v;refresh();}
+function setKcal(v){D.kcal=(v==null||v<0)?null:v;refresh();}
+function ecgWaveCanvas(wave,w,h){
+  if(typeof wave==='string'){try{wave=JSON.parse(wave);}catch(e){wave=null;}}
+  if(!wave)wave=[];
+  var cv=document.createElement('canvas');cv.width=w;cv.height=h;var ctx=cv.getContext('2d');
+  ctx.fillStyle='#fff';ctx.fillRect(0,0,w,h);
+  // grid
+  ctx.strokeStyle='#F2D6D6';ctx.lineWidth=1;
+  for(var gx=0;gx<=w;gx+=40){ctx.beginPath();ctx.moveTo(gx,0);ctx.lineTo(gx,h);ctx.stroke();}
+  for(var gy=0;gy<=h;gy+=40){ctx.beginPath();ctx.moveTo(0,gy);ctx.lineTo(w,gy);ctx.stroke();}
+  // filter placeholder values
+  var vals=[];for(var i=0;i<wave.length;i++){var v=+wave[i];if(isFinite(v)&&v>-2147483000&&v<2147483000)vals.push(v);}
+  if(!vals.length)return cv;
+  vals=ecgDetrend(vals);
+  // 1%-99% quantile for range（保住QRS波峰）
+  var sorted=vals.slice().sort(function(a,b){return a-b;});
+  var lo=sorted[Math.floor(sorted.length*0.01)];var hi=sorted[Math.floor(sorted.length*0.99)];
+  if(hi<=lo){lo=sorted[0];hi=sorted[sorted.length-1];}
+  var range=hi-lo;if(range<=0)range=1;
+  // 每列取“最偏离均值的点”，保住波峰
+  var bs=vals.length/w;
+  ctx.strokeStyle='#E8402A';ctx.lineWidth=2;ctx.beginPath();
+  var midY=h*0.55;var amp=h*0.35;var firstPt=true;
+  for(var px=0;px<w;px++){
+    var st=Math.floor(px*bs);if(st>=vals.length)break;
+    var en=Math.min(vals.length,Math.max(st+1,Math.floor((px+1)*bs)));
+    var sum=0;for(var k=st;k<en;k++)sum+=vals[k];
+    var mid=sum/(en-st),pick=vals[st],best=-1;
+    for(var k2=st;k2<en;k2++){var dd=Math.abs(vals[k2]-mid);if(dd>best){best=dd;pick=vals[k2];}}
+    var n=(pick-lo)/range;
+    var y=midY-amp*(n*2-1);
+    if(firstPt){ctx.moveTo(px,y);firstPt=false;}else ctx.lineTo(px,y);
+  }
+  ctx.stroke();
+  // title
+  ctx.fillStyle='#4A3428';ctx.font='bold 24px Microsoft YaHei';
+  ctx.fillText('心电图 · '+new Date().toLocaleString('zh-CN'),20,34);
+  ctx.fillStyle='#8A6A55';ctx.font='16px Microsoft YaHei';
+  ctx.fillText('心率 '+(D.ecg&&D.ecg.hr!=null?D.ecg.hr:'--')+' 次/分 · HRV '+(D.ecg&&D.ecg.hrv!=null?D.ecg.hrv:'--')+' 毫秒 · QT '+(D.ecg&&D.ecg.qt!=null?D.ecg.qt:'--'),20,62);
+  ctx.fillStyle='#8A6A55';ctx.font='14px Microsoft YaHei';
+  ctx.fillText('采样点 '+vals.length+' 个 · Nearby',20,h-14);
+  return cv;
+}
+function startAcc(){if(window.AndroidBridge&&window.AndroidBridge.acc){window.AndroidBridge.acc();toast('正在采集加速度数据…');}else{toast('不支持');}}
+function saveFamily(){
+  var p1=document.getElementById('em_p1');var p2=document.getElementById('em_p2');
+  if(!p1)return;
+  localStorage.setItem('fg_em1',p1.value||'');
+  localStorage.setItem('fg_em2',p2?p2.value:'');
+  if(window.AndroidBridge&&window.AndroidBridge.setFamily){
+    window.AndroidBridge.setFamily(p1.value||'',p2?p2.value:'');
+  }
+  toast('家人电话已保存');
+}
+function toggleFall(){
+  if(window.AndroidBridge&&window.AndroidBridge.acc){
+    window.AndroidBridge.acc();
+    toast('正在开启跌倒监测');
+  }else{toast('不支持');}
+}
+function setAcc(x,y,z,g){D.accX=x;D.accY=y;D.accZ=z;if(g!=null)D.accG=g;refresh();}
+function saveEcgImg(){
+  var r=D.ecg;
+  if(!r||!r.wave||!r.wave.length){toast('还没有心电图数据');return;}
+  var cv=ecgWaveCanvas(r.wave,2400,800);
+  try{
+    var dataUrl=cv.toDataURL('image/png');
+    if(window.AndroidBridge&&window.AndroidBridge.saveEcg){
+      window.AndroidBridge.saveEcg(dataUrl);
+      toast('正在保存到手机相册…');
+    }else{
+      toast('此版本不支持保存');
+    }
+  }catch(e){toast('生成图片失败:'+e);}
+}
+function setSugar(v){D.sugar=(v==null||v<0)?null:v;refresh();}
+function setTemp(v){D.temp=(v==null||v<0)?null:v;refresh();}
+function setStress(v){D.stress=(v==null||v<0)?null:v;refresh();}
+function setSleep(min,deep,light,wake,down,up,rem,awake){D.sleepMin=(min==null||min<0)?null:min;D.sleepDeep=(deep==null||deep<0)?null:deep;D.sleepLight=(light==null||light<0)?null:light;D.sleepWake=(wake==null||wake<0)?null:wake;D.sleepDown=(down==null||down==='null')?null:down;D.sleepUp=(up==null||up==='null')?null:up;D.sleepRem=(rem==null||rem<0)?null:rem;D.sleepAwake=(awake==null||awake<0)?null:awake;refresh();}
+function setSleepSeg(v){D.sleepSeg=(v==null||v==='null'||v==='')?null:v;refresh();}
+function setUpd(v){D.upd=v;refresh();}
+function setSeq(json){try{D.seq=JSON.parse(json)||[];}catch(e){D.seq=[];}refresh();}
+function setHist(json){try{D.hist=JSON.parse(json)||[];}catch(e){D.hist=[];}refresh();}
+function setRecs(json){try{D.recs=JSON.parse(json)||[];}catch(e){D.recs=[];}brRealEval();refresh();}
+function setHrvUnsup(on){D.hrvUnsup=(on===true||on==='true');refresh();}
+function recVals(k){var a=[],i;for(i=0;i<D.recs.length;i++){var v=D.recs[i][k];if(v!=null)a.push(v);}return a;}
+function recRows(k,unit){var out=[],i;for(i=D.recs.length-1;i>=0&&out.length<150;i--){var v=D.recs[i][k];if(v!=null)out.push([D.recs[i].t,v+' '+unit]);}if(!out.length)out.push(['暂无数据','--']);return out;}
+function recRowsBP(){var out=[],i;for(i=D.recs.length-1;i>=0&&out.length<150;i--){var r=D.recs[i];if(r.bph!=null)out.push([r.t,r.bph+'/'+(r.bpl==null?'--':r.bpl)]);}if(!out.length)out.push(['暂无数据','--']);return out;}
+function bpText(){return (D.bpHigh==null?'--':D.bpHigh)+'<small>/'+(D.bpLow==null?'--':D.bpLow)+'</small>';}
+function bpStatus(){if(D.bpHigh==null)return ['等待数据','info'];if(D.bpHigh<60||D.bpHigh>250||D.bpLow==null||D.bpLow<35||D.bpLow>=D.bpHigh)return ['数据异常','orange'];return ['正常','ok'];}
+function sugarHero(){return D.sugar==null?'--':String(Math.round(D.sugar*10)/10);}
+function stressHero(){return _n(D.stress);}
+function stressLabel(v){if(v==null)return '等待';if(v<40)return '放松';if(v<60)return '正常';if(v<80)return '中等';return '偏高';}
+function sleepHero(){return D.sleepMin==null?'--':(Math.floor(D.sleepMin/60)+'<small> 小时 </small>'+(D.sleepMin%60)+'<small> 分</small>');}
+function sleepText(){return D.sleepMin==null?'--':(Math.floor(D.sleepMin/60)+'小时'+(D.sleepMin%60)+'分');}
+function fmtMin(m){if(m==null)return '--';var h=Math.floor(m/60),mm=m%60;return (h>0?h+'小时':'')+mm+'分';}
+function sleepBadge(m){if(m==null)return ['等待数据','info'];if(m>600)return ['睡眠过长','info'];if(m>=420)return ['睡眠充足','ok'];if(m>=360)return ['睡眠偏少','info'];if(m>=300)return ['睡眠不足','orange'];return ['<b>严重不足</b>','orange'];}
+function sleepSegBar(){if(!D.sleepSeg)return '<div class="tip">暂无分期数据，今晚开始积累</div>';var names={'0':['深睡','#C9B6F5'],'1':['浅睡','#7C6BF0'],'2':['快速眼动','#52AEFF'],'3':['清醒','#F7B32B'],'4':['清醒','#F7B32B'],'9':['补救延长(推断)','#B9B9B9']};var segs=D.sleepSeg.split(';');var items=[],total=0,i,firstT=null,lastT=null;for(i=0;i<segs.length;i++){var p=segs[i].split('|');if(p.length!=2)continue;var info=names[p[1]]||['未知','#999999'];var t=p[0].split('-');if(t.length!=2)continue;var x=h2m(t[0]),y=h2m(t[1]);if(x<720)x+=1440;if(y<=x)y+=1440;var dur=y-x;if(dur<=0)continue;total+=dur;items.push([info[0],info[1],x,y]);if(firstT==null||x<firstT)firstT=x;if(lastT==null||y>lastT)lastT=y;}
+if(!total)return '<div class="tip">暂无分期数据，今晚开始积累</div>';var ws=Math.floor(firstT/60)*60;var we=Math.max(Math.ceil(lastT/60)*60,ws+360);var down=D.sleepDown||_fmtT(firstT),up=D.sleepUp||_fmtT(lastT%1440);var h='<div class="tl">';for(i=0;i<items.length;i++){var it=items[i];var lf=((it[2]-ws)/(we-ws)*100),wd=((it[3]-it[2])/(we-ws)*100);h+='<div style="position:absolute;left:'+lf.toFixed(2)+'%;width:'+wd.toFixed(2)+'%;background:'+it[1]+'" title="'+it[0]+' '+_fmtT(it[2]%1440)+'-'+_fmtT(it[3]%1440)+'"></div>';}
+var stepMin=((we-ws)/60>11)?120:60;var labs='';for(var m=ws;m<=we;m+=stepMin){var hh=((m%1440)+1440)%1440;labs+='<div>'+Math.floor(hh/60)+'点</div>';}h+='</div><div class="days">'+labs+'</div><div class="tlt"><span>'+down+' 入睡</span><span>'+up+' 醒</span></div><div class="legend" style="margin-top:12px"><span><i style="background:#C9B6F5"></i>深睡</span><span><i style="background:#7C6BF0"></i>浅睡</span><span><i style="background:#52AEFF"></i>快速眼动</span><span><i style="background:#F7B32B"></i>清醒</span></div>';return h;}
+function sleepSegCard(){return '<div class="card"><h3>昨晚睡眠过程</h3>'+sleepSegBar()+'</div>';}
+function updLab(def){return D.upd?('今天 '+D.upd+' 更新'):def;}
+function h2m(t){var p=(t||'0:0').split(':');return parseInt(p[0])*60+parseInt(p[1]);}
+function seqVals(k){var a=[],i;for(i=0;i<D.seq.length;i++){var v=D.seq[i][k];if(v!=null)a.push(v);}return a;}
+function seqRows(k,unit){var out=[],i;for(i=D.seq.length-1;i>=0&&out.length<10;i--){var v=D.seq[i][k];if(v!=null)out.push([D.seq[i].t,v+' '+unit]);}if(!out.length)out.push(['暂无数据','--']);return out;}
+function seqRowsBP(){var out=[],i;for(i=D.seq.length-1;i>=0&&out.length<10;i--){var r=D.seq[i];if(r.bph!=null)out.push([r.t,r.bph+'/'+(r.bpl==null?'--':r.bpl)]);}if(!out.length)out.push(['暂无数据','--']);return out;}
+function dynRange(vals,def){var mn=def,mx=def+40,i;for(i=0;i<vals.length;i++){if(vals[i]<mn)mn=vals[i];if(vals[i]>mx)mx=vals[i];}return [mn-5,mx+5];}
+function rowPts(k){var now=new Date();var pre=('0'+(now.getMonth()+1)).slice(-2)+'-'+('0'+now.getDate()).slice(-2)+' ';var a=[],i,mt,mm;for(i=0;i<D.seq.length;i++){var r=D.seq[i];if(r[k]==null)continue;mt=(r.t||'').match(/(\d{1,2}):(\d{2})\s*$/);mm=mt?(parseInt(mt[1])*60+parseInt(mt[2])):h2m(r.t);if(r.t&&r.t.indexOf(pre)===0)a.push({m:mm,v:r[k]});}a.sort(function(p1,p2){return p1.m-p2.m;});if(!a.length){for(i=0;i<D.seq.length;i++){var r2=D.seq[i];if(r2[k]==null)continue;mt=(r2.t||'').match(/(\d{1,2}):(\d{2})\s*$/);mm=mt?(parseInt(mt[1])*60+parseInt(mt[2])):h2m(r2.t);a.push({m:mm,v:r2[k]});}}a.sort(function(p1,p2){return p1.m-p2.m;});return a;}
+function seqLine(k,color,step,defMin){var pts=rowPts(k);if(pts.length<2)return '<div class="tip">📊 数据采集中，暂无足够点位</div>';var vals=pts.map(function(pp){return pp.v;});var mm=dynRange(vals,defMin);return lcA(pts,mm[0],mm[1],color,0);}
+function lcADots(pts,min,max,color,dp){var n=pts.length;if(n<2)return '';var start=pts[0].m,end=pts[n-1].m;if(end<=start)end=start+30;if(max-min<0.0001)max=min+1;var p="",i;var mi=0,ma=0;for(i=1;i<n;i++){if(pts[i].v>pts[ma].v)ma=i;if(pts[i].v<pts[mi].v)mi=i;}
+for(i=0;i<n;i++){var x=((pts[i].m-start)/(end-start)*320).toFixed(1);var y=(76-(pts[i].v-min)/(max-min)*64).toFixed(1);p+=x+","+y+" ";}
+var f=function(v){return dp?Number(v).toFixed(dp):Math.round(v);};
+var fx=function(m){return ((m-start)/(end-start)*100).toFixed(1);};
+var fy=function(v){return ((76-(v-min)/(max-min)*64)/84*100).toFixed(1);};
+var dots="";for(i=0;i<n;i++){var dx=((pts[i].m-start)/(end-start)*320).toFixed(1);var dy=(76-(pts[i].v-min)/(max-min)*64).toFixed(1);dots+='<circle cx="'+dx+'" cy="'+dy+'" r="2.6" fill="'+color+'"/>';}
+var h='<div class="lcwrap"><svg class="lc" viewBox="0 0 320 84">'+_grid(start,end)+'<polyline points="'+p+'" fill="none" stroke="'+color+'" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/>'+dots+'</svg>';
+h+='<div class="lctag" style="left:'+fx(pts[ma].m)+'%;top:'+fy(pts[ma].v)+'%"><b>'+f(pts[ma].v)+'</b></div>';
+h+='<div class="lctag low" style="left:'+fx(pts[mi].m)+'%;top:'+fy(pts[mi].v)+'%"><b>'+f(pts[mi].v)+'</b></div>';
+h+='<div class="ytag top">'+f(max)+'</div><div class="ytag bot">'+f(min)+'</div>';
+return h+'</div>'+_axis(start,end);}
+function seqLineDots(k,color,defMin,fmin,fmax){var pts=rowPts(k);if(pts.length<2)return '<div class="tip">📊 数据采集中，暂无足够点位</div>';var vals=pts.map(function(pp){return pp.v;});var mm=(fmin!=null&&fmax!=null)?[fmin,fmax]:dynRange(vals,defMin);return lcADots(pts,mm[0],mm[1],color,1);}
+function seqLine2(k1,k2,c1,c2,step,defMin){var pa=rowPts(k1),pb=rowPts(k2);if(pa.length<2||pb.length<2)return '<div class="tip">📊 数据采集中，暂无足够点位</div>';var mm=dynRange(pa.map(function(pp){return pp.v;}),defMin);return lcA2(pa,pb,mm[0],mm[1],c1,c2,0);}
+function histBars(k,fmt){var a=[],i;for(i=0;i<D.hist.length;i++){var v=D.hist[i][k];a.push(v==null?null:v);}var has=false;for(i=0;i<a.length;i++){if(a[i]!=null)has=true;}if(!has)return '<div class="tip">📊 暂无历史数据，从今晚开始积累</div>';var mn=null,mx=null;for(i=0;i<a.length;i++){if(a[i]!=null){if(mn==null||a[i]<mn)mn=a[i];if(mx==null||a[i]>mx)mx=a[i];}}var h='<div class="bars">';for(i=0;i<a.length;i++){var v2=a[i];var pct=(v2==null||mx==mn)?50:(8+84*(v2-mn)/(mx-mn));h+='<div class="bar" style="height:'+pct.toFixed(0)+'%"><span>'+(v2==null?'--':(fmt?fmt(v2):v2))+'</span></div>';}h+='</div><div class="days">';for(i=0;i<a.length;i++){h+='<div>'+D.hist[i].d+'</div>';}return h+'</div>';}
+function bridgeRescan(){if(window.AndroidBridge&&AndroidBridge.connectRing){AndroidBridge.connectRing();try{if(AndroidBridge.vibrate)AndroidBridge.vibrate(400);}catch(e){}toast('已开始搜索手环，正在连接…');}else{toast('连接服务未就绪');}}
+function head(t,i){return '<div class="nav"><div class="back" onclick="back()">‹</div><div class="title">'+(i||'')+' '+t+'</div><div style="width:34px"></div></div>';}
+function hero(v,lab,b,cls){return '<div class="hero"><div class="v">'+v+'</div><div class="lab">'+lab+'</div><div class="badge '+cls+'">'+b+'</div></div>';}
+function _todayMD(){var d=new Date();return ('0'+(d.getMonth()+1)).slice(-2)+'-'+('0'+d.getDate()).slice(-2);}
+function histBarsC(k,color,fmt){var a=[],i;for(i=0;i<D.hist.length;i++){var v=D.hist[i][k];a.push(v==null?null:v);}var has=false;for(i=0;i<a.length;i++){if(a[i]!=null)has=true;}if(!has)return '<div class="tip">📊 暂无历史数据，从今晚开始积累</div>';var mn=null,mx=null;for(i=0;i<a.length;i++){if(a[i]!=null){if(mn==null||a[i]<mn)mn=a[i];if(mx==null||a[i]>mx)mx=a[i];}}var h='<div class="bars">';for(i=0;i<a.length;i++){var v2=a[i];var pct=(v2==null||mx==mn)?50:(8+84*(v2-mn)/(mx-mn));h+='<div class="bar" style="height:'+pct.toFixed(0)+'%;background:'+color+'"><span>'+(v2==null?'--':(fmt?fmt(v2):v2))+'</span></div>';}h+='</div><div class="days">';for(i=0;i<a.length;i++){h+='<div>'+D.hist[i].d+'</div>';}return h+'</div>';}
+function histStepsFix(){var a=[],i;for(i=0;i<D.hist.length;i++){var h=D.hist[i];var v=h.steps;if(h.d===_todayMD()&&D.steps!=null&&D.steps>0)v=D.steps;a.push(v);}return a;}
+function stepsBars(){var a=histStepsFix();var has=false,i;for(i=0;i<a.length;i++){if(a[i]!=null)has=true;}if(!has)return '<div class="tip">📊 暂无历史数据，从今晚开始积累</div>';var mn=null,mx=null;for(i=0;i<a.length;i++){if(a[i]!=null){if(mn==null||a[i]<mn)mn=a[i];if(mx==null||a[i]>mx)mx=a[i];}}var h='<div class="bars">';for(i=0;i<a.length;i++){var v2=a[i];var pct=(v2==null||mx==mn)?50:(8+84*(v2-mn)/(mx-mn));h+='<div class="bar" style="height:'+pct.toFixed(0)+'%"><span>'+(v2==null?'--':v2)+'</span></div>';}h+='</div><div class="days">';for(i=0;i<a.length;i++){h+='<div>'+D.hist[i].d+'</div>';}return h+'</div>';}
+function bpTodayRows(){var pre=_todayMD()+' ';var src=D.seq&&D.seq.length?D.seq:D.recs;var out=[],i;for(i=src.length-1;i>=0;i--){var r=src[i];if(r.bph==null)continue;var t=r.t||'';if(t.indexOf(pre)!==0)continue;var msgs=[];if(r.bph>=140)msgs.push('高压偏高');else if(r.bph<90)msgs.push('高压偏低');if(r.bpl!=null){if(r.bpl>=90)msgs.push('低压偏高');else if(r.bpl<60)msgs.push('低压偏低');}if(msgs.length)out.push([t.slice(6),msgs.join('、')+'（'+r.bph+'/'+r.bpl+'）','orange']);}if(!out.length)out.push(['今天','暂无明显血压异常','green']);return out;}
+function hrvCur(){if(D.hrv!=null)return D.hrv;for(var i=D.recs.length-1;i>=0;i--){if(D.recs[i].hrv!=null)return D.recs[i].hrv;}return null;}
+function slStructRows(){var t=(D.sleepDeep||0)+(D.sleepLight||0)+(D.sleepRem||0);var pc=function(v){return (v==null||!t)?'':' · 占'+Math.round(v*100/t)+'%';};return [['🌙 深睡',fmtMin(D.sleepDeep)+pc(D.sleepDeep)],['😴 浅睡',fmtMin(D.sleepLight)+pc(D.sleepLight)],['🔵 快速眼动',(D.sleepRem==null?'--':fmtMin(D.sleepRem)+pc(D.sleepRem))],['🟠 夜间清醒时长',(D.sleepAwake==null?'--':fmtMin(D.sleepAwake))],['👀 夜间醒来次数',(D.sleepWake==null?'--':D.sleepWake+' 次'),'orange']];}
+
+function bars(vals,unit,labels){var h='<div class="bars">';for(var i=0;i<vals.length;i++){h+='<div class="bar'+(vals[i][2]?' hot':'')+'" style="height:'+vals[i][1]+'%"><span>'+vals[i][0]+(unit||'')+'</span></div>';}h+='</div><div class="days">';if(labels){for(var j=0;j<labels.length;j++)h+='<div>'+labels[j]+'</div>';}else{h+='<div>六</div><div>日</div><div>一</div><div>二</div><div>三</div><div>四</div><div>今天</div>';}return h+'</div>';}
+function rows(list){var h='';for(var i=0;i<list.length;i++){h+='<div class="row"><span class="k">'+list[i][0]+'</span><span class="v '+(list[i][2]||'')+'">'+list[i][1]+'</span></div>';}return h;}
+function fr(id,ico,label,right,cls){var oc=id?("show('"+id+"')"):("toast('演示版：正式版可设置')");var chev=id?'<span class="chev">›</span>':'';return '<div class="frow" onclick="'+oc+'"><div class="l">'+ico+' '+label+'</div><div class="r '+(cls||'green')+'">'+right+chev+'</div></div>';}
+function fcard(ico,title,sub,onclick,cls){return '<div class="fcard '+(cls||'accent-orange')+'" onclick="'+onclick+'"><div class="ico">'+ico+'</div><div><div class="tt">'+title+'</div><div class="ss">'+sub+'</div></div><div class="arrow">›</div></div>';}
+function section(t){return '<div class="section"><span class="sdot"></span>'+t+'</div>';}
+function lc(vals,min,max,color){var n=vals.length,p='';for(var i=0;i<n;i++){var x=(i/(n-1)*320).toFixed(1);var y=(76-(vals[i]-min)/(max-min)*64).toFixed(1);p+=x+','+y+' ';}return '<svg class="lc" viewBox="0 0 320 84" preserveAspectRatio="none"><polyline points="'+p+'" fill="none" stroke="'+color+'" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/></svg>';}
+function _fmtT(m){m=Math.round(m);var h=Math.floor(m/60),mm=m%60;return h+':'+(mm<10?'0':'')+mm;}
+function _grid(start,end){var g="";for(var j=0;j<5;j++){var gx=(j/4*320).toFixed(1);g+='<line x1="'+gx+'" y1="4" x2="'+gx+'" y2="76" stroke="#F0DFD2" stroke-width="1"/>';}return g;}
+function _axis(start,end){var h='<div class="taxis">';for(var j=0;j<5;j++){h+='<span>'+_fmtT(start+(end-start)*j/4)+'</span>';}return h+'</div>';}
+function lcT(vals,min,max,color,start,step){var n=vals.length,end=start+(n-1)*step,p="";for(var i=0;i<n;i++){var x=((i*step)/(end-start)*320).toFixed(1);var y=(76-(vals[i]-min)/(max-min)*64).toFixed(1);p+=x+","+y+" ";}return '<svg class="lc" viewBox="0 0 320 84">'+_grid(start,end)+'<polyline points="'+p+'" fill="none" stroke="'+color+'" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/></svg>'+_axis(start,end);}
+function lcT2(a,b,min,max,c1,c2,start,step){var n=a.length,end=start+(n-1)*step;var f=function(vals){var p="";for(var i=0;i<n;i++){var x=((i*step)/(end-start)*320).toFixed(1);var y=(76-(vals[i]-min)/(max-min)*64).toFixed(1);p+=x+","+y+" ";}return p;};return '<svg class="lc" viewBox="0 0 320 84">'+_grid(start,end)+'<polyline points="'+f(a)+'" fill="none" stroke="'+c1+'" stroke-width="2.6"/><polyline points="'+f(b)+'" fill="none" stroke="'+c2+'" stroke-width="2.6" stroke-dasharray="5 4"/></svg>'+_axis(start,end);}
+function lc2(a,b,min,max,c1,c2){var f=function(vals){var n=vals.length,p='';for(var i=0;i<n;i++){var x=(i/(n-1)*320).toFixed(1);var y=(76-(vals[i]-min)/(max-min)*64).toFixed(1);p+=x+','+y+' ';}return p;};return '<svg class="lc" viewBox="0 0 320 84" preserveAspectRatio="none"><polyline points="'+f(a)+'" fill="none" stroke="'+c1+'" stroke-width="2.6"/><polyline points="'+f(b)+'" fill="none" stroke="'+c2+'" stroke-width="2.6" stroke-dasharray="5 4"/></svg>';}
+
+function lcA(pts,min,max,color,dp){var n=pts.length;if(n<2)return '';var start=pts[0].m,end=pts[n-1].m;if(end<=start)end=start+30;if(max-min<0.0001)max=min+1;var p="",i;
+var mi=0,ma=0;for(i=1;i<n;i++){if(pts[i].v>pts[ma].v)ma=i;if(pts[i].v<pts[mi].v)mi=i;}
+for(i=0;i<n;i++){var x=((pts[i].m-start)/(end-start)*320).toFixed(1);var y=(76-(pts[i].v-min)/(max-min)*64).toFixed(1);p+=x+","+y+" ";}
+var f=function(v){return dp?Number(v).toFixed(dp):Math.round(v);};
+var fx=function(m){return ((m-start)/(end-start)*100).toFixed(1);};
+var fy=function(v){return ((76-(v-min)/(max-min)*64)/84*100).toFixed(1);};
+var h='<div class="lcwrap"><svg class="lc" viewBox="0 0 320 84">'+_grid(start,end)+'<polyline points="'+p+'" fill="none" stroke="'+color+'" stroke-width="2.6" stroke-linejoin="round" stroke-linecap="round"/></svg>';
+h+='<div class="lctag" style="left:'+fx(pts[ma].m)+'%;top:'+fy(pts[ma].v)+'%"><b>'+f(pts[ma].v)+'</b></div>';
+h+='<div class="lctag low" style="left:'+fx(pts[mi].m)+'%;top:'+fy(pts[mi].v)+'%"><b>'+f(pts[mi].v)+'</b></div>';
+h+='<div class="ytag top">'+f(max)+'</div><div class="ytag bot">'+f(min)+'</div>';
+return h+'</div>'+_axis(start,end);}
+function lcA2(pa,pb,min,max,c1,c2,dp){var n=pa.length;if(n<2)return '';var start=pa[0].m,end=pa[n-1].m;if(end<=start)end=start+30;if(max-min<0.0001)max=min+1;
+var pl=function(arr){var p="",i;for(i=0;i<arr.length;i++){var x=((arr[i].m-start)/(end-start)*320).toFixed(1);var y=(76-(arr[i].v-min)/(max-min)*64).toFixed(1);p+=x+","+y+" ";}return p;};
+var mi=0,ma=0,ni=0,na=0,i;for(i=1;i<n;i++){if(pa[i].v>pa[ma].v)ma=i;if(pa[i].v<pa[mi].v)mi=i;if(pb[i].v>pb[na].v)na=i;if(pb[i].v<pb[ni].v)ni=i;}
+var f=function(v){return dp?Number(v).toFixed(dp):Math.round(v);};
+var fx=function(m){return ((m-start)/(end-start)*100).toFixed(1);};
+var fy=function(v){return ((76-(v-min)/(max-min)*64)/84*100).toFixed(1);};
+var h='<div class="lcwrap"><svg class="lc" viewBox="0 0 320 84">'+_grid(start,end)+'<polyline points="'+pl(pa)+'" fill="none" stroke="'+c1+'" stroke-width="2.6"/><polyline points="'+pl(pb)+'" fill="none" stroke="'+c2+'" stroke-width="2.6" stroke-dasharray="5 4"/></svg>';
+h+='<div class="lctag" style="left:'+fx(pa[ma].m)+'%;top:'+fy(pa[ma].v)+'%;color:'+c1+'"><b>'+f(pa[ma].v)+'</b></div>';
+h+='<div class="lctag low" style="left:'+fx(pa[mi].m)+'%;top:'+fy(pa[mi].v)+'%;color:'+c1+'"><b>'+f(pa[mi].v)+'</b></div>';
+h+='<div class="lctag" style="left:'+fx(pb[na].m)+'%;top:'+fy(pb[na].v)+'%;color:'+c2+'"><b>'+f(pb[na].v)+'</b></div>';
+h+='<div class="lctag low" style="left:'+fx(pb[ni].m)+'%;top:'+fy(pb[ni].v)+'%;color:'+c2+'"><b>'+f(pb[ni].v)+'</b></div>';
+h+='<div class="ytag top">'+f(max)+'</div><div class="ytag bot">'+f(min)+'</div>';
+return h+'</div>'+_axis(start,end);}
+var fallTimer=null,fallLeft=30;
+function showFallConfirm(g){try{document.getElementById('fallbox').classList.remove('hide');}catch(e){}fallLeft=30;document.getElementById('fallcnt').innerHTML=fallLeft;document.getElementById('fallstat').innerHTML='手环已震动 · 摔倒强度 '+g+'G · 30秒没确认自动通知家人';if(fallTimer)clearInterval(fallTimer);fallTimer=setInterval(function(){fallLeft--;document.getElementById('fallcnt').innerHTML=Math.max(0,fallLeft);if(fallLeft<=0){clearInterval(fallTimer);fallTimer=null;}},1000);}
+function fallPromptTimeout(g){try{document.getElementById('fallbox').classList.add('hide');}catch(e){}if(fallTimer){clearInterval(fallTimer);fallTimer=null;}toast('⚠️ 30秒未确认，已自动通知家人');}
+function fallConfirm(){try{document.getElementById('fallbox').classList.add('hide');}catch(e){}if(fallTimer){clearInterval(fallTimer);fallTimer=null;}try{if(window.AndroidBridge&&AndroidBridge.fallConfirmed)AndroidBridge.fallConfirmed();}catch(e){}}
+function fallHelp(){try{document.getElementById('fallbox').classList.add('hide');}catch(e){}if(fallTimer){clearInterval(fallTimer);fallTimer=null;}try{if(window.AndroidBridge&&AndroidBridge.fallHelp)AndroidBridge.fallHelp();}catch(e){}}
+var FALLNOTICES=(function(){try{return JSON.parse(localStorage.getItem('fg_fall_notices'))||[];}catch(e){return[];}})();
+var FAMILYNOTICES=(function(){try{return JSON.parse(localStorage.getItem('fg_family_notices'))||[];}catch(e){return[];}})();
+function pushFamilyNotice(text){var d=new Date();var t=(d.getMonth()+1)+'月'+d.getDate()+'日 '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);FAMILYNOTICES.unshift({t:t,text:text});if(FAMILYNOTICES.length>20)FAMILYNOTICES.length=20;try{localStorage.setItem('fg_family_notices',JSON.stringify(FAMILYNOTICES));}catch(e){}if(stack[stack.length-1]==='family')show('family',false);toast('🔔 家人页提醒：'+text);}
+function testBand(){if(window.AndroidBridge&&window.AndroidBridge.testBand){toast('正在发手环测试提醒…');window.AndroidBridge.testBand();}else{toast('不支持');}}
+function showFallNotice(g){var d=new Date();var t=(d.getMonth()+1)+'月'+d.getDate()+'日 '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);FALLNOTICES.unshift({t:t,g:g});if(FALLNOTICES.length>20)FALLNOTICES.length=20;try{localStorage.setItem('fg_fall_notices',JSON.stringify(FALLNOTICES));}catch(e){}toast('🟢 子女端提醒：刚才摔倒，已自行确认没问题');if(stack[stack.length-1]==='family')show('family',false);}
+function toast(m){var t=document.getElementById('toast');t.innerHTML=m;t.classList.remove('hide');clearTimeout(t._tm);t._tm=setTimeout(function(){t.classList.add('hide');},2600);}
+function detect(label){var o=document.getElementById('overlay');document.getElementById('ovt').innerHTML='正在'+label+'…';o.classList.remove('hide');setTimeout(function(){o.classList.add('hide');toast(label+'完成，结果已更新');},3000);}
+function show(id,push){if(push!==false)stack.push(id);document.getElementById('view').innerHTML=S[id]();applyTg();window.scrollTo(0,0);if(id==='d_sos')startSos();}
+function back(){if(stack.length>1){stack.pop();show(stack[stack.length-1],false);}}
+function tab(id){stack=[id];show(id,false);var ids=['home','funcs','family','settings'];for(var i=0;i<ids.length;i++){document.getElementById('ntab_'+ids[i]).className=(ids[i]===id?'act':'');}}
+var sosTimer=null;
+// ===== 呼吸困难风险（只在子女端显示，父母端不出现）=====
+var BR={hist:[],consec:0,level:"ok",score:0,reasons:[],alerts:"0 条"};
+function brEval(list){var res={score:0,level:"ok",reasons:[]};var clean=[],i;for(i=0;i<list.length;i++){var p=list[i];if(p&&p.hr>=40&&p.hr<=180&&p.spo2>=80&&p.spo2<=100)clean.push(p);}list=clean;if(list.length<3)return res;
+  var base=list.slice(0,Math.max(3,list.length-2));var avg=function(k){var t=0;for(var i=0;i<base.length;i++)t+=base[i][k];return t/base.length;};
+  var hb=avg("hr"),sb=avg("spo2");var cur=list[list.length-1],prev=list[list.length-2];var sc=0,r=[];
+  if(cur.spo2<=88){sc+=4;r.push("血氧降到 "+cur.spo2+"%（严重偏低）");}
+  else if(cur.spo2<=92){sc+=3;r.push("血氧降到 "+cur.spo2+"%（低于92）");}
+  else if(cur.spo2<=94&&BR.consec>=1){sc+=2;r.push("血氧连续偏低（约94%）");}
+  if(prev.spo2-cur.spo2>=4&&cur.spo2<=93){sc+=2;r.push("血氧较上次骤降 "+(prev.spo2-cur.spo2)+"%");}
+  if(cur.hr>=130||(cur.hr>=hb*1.35&&cur.hr>=110)){sc+=2;r.push("心率 "+cur.hr+" 次/分异常升高（平时约 "+Math.round(hb)+"）");}
+  if(cur.hr<45){sc+=3;r.push("心率 "+cur.hr+" 次/分过低");}
+  if(prev.spo2-cur.spo2>=4&&cur.hr-prev.hr>=15){sc+=2;r.push("血氧骤降同时心率飙升");}
+  BR.consec=(cur.spo2<=94)?BR.consec+1:0;
+  res.score=sc;res.reasons=r;res.level=(sc>=5)?"alert":(sc>=3?"watch":"ok");return res;}
+function brStatus(){if(BR.level==="alert")return {level:"alert",ico:"🚨",banner:"呼吸风险：请注意",text:"<span class=\"red\">⚠️ 风险</span>",cls:"red",reasons:BR.reasons,alerts:BR.alerts};
+  if(BR.level==="watch")return {level:"watch",ico:"🫁",banner:"呼吸有点波动",text:"<span class=\"orange\">关注</span>",cls:"orange",reasons:BR.reasons,alerts:BR.alerts};
+  return {level:"ok",text:"正常",cls:"green",reasons:[],alerts:BR.alerts};}
+function brDemo(){var seq=[[97,78],[97,79],[96,78],[95,79],[94,82],[94,86],[92,98]];
+  var i=0;if(brDemo._t)clearInterval(brDemo._t);
+  brDemo._t=setInterval(function(){BR.hist.push({spo2:seq[i][0],hr:seq[i][1]});if(BR.hist.length>12)BR.hist.shift();
+    var res=brEval(BR.hist);BR.level=res.level;BR.score=res.score;BR.reasons=res.reasons;
+    if(res.level==="alert"){BR.alerts="1 条";toast("已提醒子女：呼吸风险升高（血氧92%、心率98）");}
+    else if(res.level==="watch"){toast("子女端提示：呼吸有点波动，继续观察");}
+    tab("family");i++;if(i>=seq.length){clearInterval(brDemo._t);brDemo._t=null;}}
+  ,900);}
+// 真实数据评估：用最近7天记录里最新12条“心率+血氧都有值”的数据跑一次呼吸困难评分
+function brRealEval(){
+  var rows=[],i;
+  for(i=D.recs.length-1;i>=0&&rows.length<12;i--){var r=D.recs[i];if(r&&r.hr>0&&r.spo2>0)rows.unshift({spo2:r.spo2,hr:r.hr});}
+  if(rows.length<3)return;
+  BR.hist=rows;
+  var res=brEval(BR.hist);
+  var prev=BR.level;
+  BR.level=res.level;BR.score=res.score;BR.reasons=res.reasons;
+  if(res.level==="alert"){BR.alerts="1 条";if(prev!=="alert")toast("🚨 呼吸风险升高，已提醒子女端");}
+  else if(res.level==="watch"){if(prev==="ok")toast("🫁 呼吸有点波动，继续观察");}
+  else{BR.alerts="0 条";}
+}
+function startSos(){if(sosTimer)clearInterval(sosTimer);var n=5;var el=document.getElementById('soscnt');el.innerHTML=n;sosTimer=setInterval(function(){n--;if(el)el.innerHTML=n;if(n<=0){clearInterval(sosTimer);sosTimer=null;tab('home');toast('演示结束：实际版会拨打儿子电话并发送短信');}},1000);}
+function cancelSos(){if(sosTimer)clearInterval(sosTimer);sosTimer=null;tab('home');toast('已取消紧急呼救');}
+function tg(id){var el=document.getElementById(id);el.innerHTML=(el.innerHTML==='开'?'关':'开');el.className=(el.innerHTML==='开'?'green':'');var on=el.innerHTML==='开';try{var m=JSON.parse(localStorage.getItem('fg_tg')||'{}');m[id]=on;localStorage.setItem('fg_tg',JSON.stringify(m));}catch(e){}try{if(window.AndroidBridge&&AndroidBridge.setAlert)AndroidBridge.setAlert(id,on);}catch(e){}toast('已'+(on?'开启':'关闭')+'该提醒');}
+function applyTg(){try{var m=JSON.parse(localStorage.getItem('fg_tg')||'{}');for(var k in m){var el=document.getElementById(k);if(el){el.innerHTML=m[k]?'开':'关';el.className=m[k]?'green':'';}}}catch(e){}}
+
+// ===== 用药提醒：可添加/删除/开关，到点提醒（手环震动连接后生效）=====
+var GOAL=(function(){var v=parseInt(localStorage.getItem('fg_goal'));return v>0?v:10000;})();
+function saveGoal(){var v=parseInt(document.getElementById('g_goal').value);if(!(v>=1000&&v<=100000)){toast('步数目标请填1000~100000');return;}GOAL=v;try{localStorage.setItem('fg_goal',String(v));}catch(e){}show(stack[stack.length-1],false);toast('目标已保存：'+v+' 步');}
+var MEDS=(function(){try{var v=JSON.parse(localStorage.getItem('fg_meds'));if(v&&v.length)return v;}catch(e){}return [{id:1,t:'08:00',name:'降压药',dose:'1片',on:true},{id:2,t:'12:30',name:'二甲双胍',dose:'0.5g',on:true},{id:3,t:'18:30',name:'降压药',dose:'1片',on:true}];})();
+function medSave(){try{localStorage.setItem('fg_meds',JSON.stringify(MEDS));}catch(e){}}
+function medLabel(m){return m.t+' · '+m.name+(m.dose?' '+m.dose:'');}
+function _fired(){try{return JSON.parse(localStorage.getItem('fg_med_fired'))||{date:'',ids:[]};}catch(e){return {date:'',ids:[]};}}
+function _nowHM(){var d=new Date();return (d.getHours()<10?'0':'')+d.getHours()+':'+(d.getMinutes()<10?'0':'')+d.getMinutes();}
+function _today(){var d=new Date();return d.getFullYear()+'-'+(d.getMonth()+1)+'-'+d.getDate();}
+function medHomeRows(){var f=_fired(),td=_today();if(f.date!==td)f={date:td,ids:[]};return MEDS.map(function(m){var done=m.on&&f.ids.indexOf(String(m.id))>=0;return [medLabel(m),m.on?(done?'✓ 已服':'⏰ 待服'):'已停用',m.on?(done?'green':'orange'):''];});}
+function medSetRows(){return MEDS.map(function(m){return [medLabel(m),'<span id="med_'+m.id+'" class="'+(m.on?'green':'')+'" onclick="medToggle('+m.id+')">'+(m.on?'开':'关')+'</span>'];});}
+function medToggle(id){var m=null;for(var i=0;i<MEDS.length;i++){if(MEDS[i].id===id){m=MEDS[i];m.on=!m.on;break;}}medSave();show(stack[stack.length-1],false);if(m)toast(m.on?'已开启该提醒':'已停用该提醒');}
+function addMed(){var t=document.getElementById('m_time').value||'';var n=document.getElementById('m_name').value.replace(/^\s+|\s+$/g,'');var d=document.getElementById('m_dose').value.replace(/^\s+|\s+$/g,'');if(!t||!n){toast('请填好时间和药名');return;}MEDS.push({id:Date.now(),t:t,name:n,dose:d,on:true});medSave();show('d_meds',false);toast('已添加：'+t+' '+n);}
+function delMed(id){MEDS=MEDS.filter(function(m){return m.id!==id;});medSave();show('d_meds',false);toast('已删除');}
+function medAdminRows(){return MEDS.map(function(m){return [medLabel(m),'<span class="'+(m.on?'green':'')+'" onclick="medToggle('+m.id+')">'+(m.on?'开':'关')+'</span> <span class="del" onclick="delMed('+m.id+')">删除</span>'];});}
+S['d_meds']=function(){return head('用药提醒设置','💊')+'<div class="card medform"><h3>添加药物</h3><div class="mini" style="margin-top:10px">吃药时间</div><input class="inp" id="m_time" type="time" value="08:00"><div class="mini" style="margin-top:10px">药品名称</div><input class="inp" id="m_name" type="text" placeholder="药名（如：降压药）" autocomplete="off"><div class="mini" style="margin-top:10px">剂量</div><input class="inp" id="m_dose" type="text" placeholder="剂量（如：1片）" autocomplete="off"><div class="mbtn" onclick="addMed()">保存这个药</div></div><div class="card"><h3>已设置的药物</h3>'+rows(medAdminRows())+'</div><div class="tip">💡 每种药单独设一个时间；到点 App 弹窗提醒，手机震动。手环不参与用药提醒。</div>';};
+function medTick(){var hm=_nowHM(),td=_today(),f=_fired();if(f.date!==td){f={date:td,ids:[]};}for(var i=0;i<MEDS.length;i++){var m=MEDS[i];if(m.on&&m.t===hm&&f.ids.indexOf(String(m.id))<0){f.ids.push(String(m.id));toast('⏰ 该吃药了：'+m.name+(m.dose?' '+m.dose:'')+'（'+m.t+'）');try{if(window.AndroidBridge&&AndroidBridge.vibrate)AndroidBridge.vibrate(800);}catch(e){}}}try{localStorage.setItem('fg_med_fired',JSON.stringify(f));}catch(e){}}
+setInterval(medTick,15000);
+(function(){try{var m=JSON.parse(localStorage.getItem('fg_tg')||'{}');if(window.AndroidBridge&&AndroidBridge.setAlert){for(var k in m){AndroidBridge.setAlert(k,m[k]);}}}catch(e){}})();
+var THRESH=(function(){try{var v=JSON.parse(localStorage.getItem('fg_thresh'));if(v&&v.spo2&&v.hrHigh&&v.hrLow)return {spo2:v.spo2,hrHigh:v.hrHigh,hrLow:v.hrLow,sugarLow:v.sugarLow||3.9,fallG:v.fallG||2.5};}catch(e){}return {spo2:90,hrHigh:140,hrLow:45,sugarLow:3.9,fallG:2.5};})();
+try{if(window.AndroidBridge&&AndroidBridge.setThresholds)AndroidBridge.setThresholds(THRESH.spo2,THRESH.hrHigh,THRESH.hrLow,THRESH.sugarLow,THRESH.fallG);}catch(e){}
+function logUpOn(){try{if(window.AndroidBridge&&AndroidBridge.getLogUpload)return AndroidBridge.getLogUpload()==='1';}catch(e){}return true;}
+function tgLog(){var n=!logUpOn();try{if(window.AndroidBridge&&AndroidBridge.setLogUpload)AndroidBridge.setLogUpload(n?'1':'0');}catch(e){}show('settings',false);toast(n?'健康数据上传已开启：测量记录和摔倒判定日志每天自动同步':'健康数据上传已关闭');}
+function saveThresh(){var sp=parseInt(document.getElementById('th_spo2').value),hh=parseInt(document.getElementById('th_hrhigh').value),hl=parseInt(document.getElementById('th_hrlow').value),sg=parseFloat(document.getElementById('th_sugar').value),fg=parseFloat(document.getElementById('th_fall').value);if(!(sp>=70&&sp<=99)){toast('血氧下限请填70~99');return;}if(!(hh>=80&&hh<=220)){toast('心率上限请填80~220');return;}if(!(hl>=30&&hl<=90)){toast('心率下限请填30~90');return;}if(hl>=hh){toast('心率下限要小于心率上限');return;}if(!(sg>=2.0&&sg<=6.0)){toast('血糖下限请填2.0~6.0');return;}if(!(fg>=1.5&&fg<=5.0)){toast('摔倒阈值请填1.5~5.0');return;}THRESH={spo2:sp,hrHigh:hh,hrLow:hl,sugarLow:sg,fallG:fg};try{localStorage.setItem('fg_thresh',JSON.stringify(THRESH));}catch(e){}try{if(window.AndroidBridge&&AndroidBridge.setThresholds)AndroidBridge.setThresholds(sp,hh,hl,sg,fg);}catch(e){}show('settings',false);toast('告警阈值已保存，立即生效');}
+S['home']=function(){
+  return '<div class="home-head"><div class="hi">'+greet()+'，苹果 👋</div><div class="sub">'+(D.connected?'已连接':'未连接')+' · 电量'+battText()+'</div></div>'
+ +'<div class="grid"><div class="gcard" onclick="show(\'d_heart\')"><div class="ico">❤️</div><div class="val">'+hrText()+'<small>次/分</small></div><div class="label">心率 · '+(D.hr==null?'等待':'正常')+'</div></div>'
+ +'<div class="gcard" onclick="show(\'d_spo2\')"><div class="ico"><span class="o2">O₂</span></div><div class="val">'+spo2Text()+'<small>%</small></div><div class="label">血氧 · '+(D.spo2==null?'等待':'正常')+'</div></div>'
+ +'<div class="gcard" onclick="show(\'d_bp\')"><div class="ico">🩸</div><div class="val">'+bpText()+'</div><div class="label">血压 · '+(D.bpHigh==null?'等待':'正常')+'</div></div>'
+ +'<div class="gcard" onclick="show(\'d_sleep\')"><div class="ico">🌙</div><div class="val">'+sleepHero()+'</div><div class="label">昨晚睡眠</div></div>'
+ +'<div class="gcard" onclick="show(\'d_sugar\')"><div class="ico">🍚</div><div class="val">'+sugarHero()+'</div><div class="label">血糖 毫摩尔/升 · 参考</div></div>'
+ +'<div class="gcard" onclick="show(\'d_temp\')"><div class="ico">🌡</div><div class="val">'+_n(D.temp)+'<small>℃</small></div><div class="label">体温 · '+(D.temp==null?'等待':'自动')+'</div></div>'
+ +'<div class="gcard" onclick="show(\'d_stress\')"><div class="ico">🧘</div><div class="val">'+stressHero()+'</div><div class="label">压力 · '+stressLabel(D.stress)+'</div></div>'
+ +'<div class="gcard" onclick="show(\'d_activity\')"><div class="ico">🚶</div><div class="val">'+_n(D.steps)+'<small>步</small></div><div class="label">今日运动 · '+((D.steps!=null&&D.steps>=GOAL)?'达标':'进行中')+'</div></div></div>'
+ +'<div class="card"><h3>💊 用药提醒</h3>'+rows(medHomeRows())+'</div>'
+ +'<div class="sos" onclick="show(\'d_sos\')">紧急呼救<small>按下后立即通知儿子和女儿</small></div>'
+ +'<div class="tip">🏠 数据由手环自动采集，无需手动操作。</div>';};
+S['funcs']=function(){return ''
+ +section('自动监测')
+ +fcard('❤️','心率','每5分钟一次',"show('d_heart')",'accent-green')
+ +fcard('O₂','血氧','每10分钟一次',"show('d_spo2')",'accent-green')
+ +fcard('🩸','血压','每10分钟一次',"show('d_bp')",'accent-green')
+ +fcard('🍚','血糖','每10分钟一次',"show('d_sugar')",'accent-green')
+ +fcard('📈','HRV','每10分钟一次',"show('d_hrv')",'accent-green')
+ +fcard('🌙','睡眠','整夜记录',"show('d_sleep')",'accent-green')
+ +fcard('🧘','压力','每10分钟一次',"show('d_stress')",'accent-green')
+ +fcard('🚶','每日运动','自动计步',"show('d_activity')",'accent-green')
+ +section('手动检测')
+ +fcard('🫀','心电图','30秒记录',"show('d_ecg')",'accent-orange')
+ +fcard('⚖️','身体成分','约1分钟',"show('d_body')",'accent-orange')
+ +fcard('🧪','血液成分','尿酸/血脂',"show('d_blood')",'accent-orange')
+ +fcard('💧','皮肤电活动','约1分钟',"show('d_sweat')",'accent-orange')
+ +fcard('📋','微体检报告','10项综合',"show('d_micro')",'accent-orange')
+ +section('研发测试')
+ +fcard('🧭','加速度计','研发测试',"show('d_acc')",'accent-orange')
+ +section('家人关怀')
+ +fcard('🚨','告警记录','本周 0 条',"show('d_alerts')",'accent-red')
+ +fcard('🩺','给医生看','导出PDF',"show('d_doctor')",'accent-green');};
+S['family']=function(){var st=brStatus();var ok=(st.level==='ok');
+return ''
+ +'<div class="home-head"><div class="hi">'+(ok?'✅ 一切正常':st.ico+' '+st.banner)+'</div><div class="sub">'+(ok?'当前状态稳定，系统持续监测':'已提醒儿子、女儿，请尽快确认')+'</div><div class="date">'+connText()+' · 电量'+battText()+' · 实时更新</div></div>'
+ +(st.reasons.length?'<div class="notice"><div class="t">⚠️ 为什么提醒</div><div class="s">'+st.reasons.map(function(r,i){return '<b>'+(i+1)+'. '+r+'</b>';}).join('<br>')+'</div></div>':'')
+ +'<div class="pillrow">'
+ +'<div class="pill"><div class="k">心率</div><div class="v green">'+hrText()+' 次/分</div></div>'
+ +'<div class="pill"><div class="k">血氧</div><div class="v green">'+spo2Text()+'%</div></div>'
+ +'<div class="pill"><div class="k">昨晚睡眠</div><div class="v green">'+sleepText()+'</div></div>'
+ +'<div class="pill"><div class="k">今日运动</div><div class="v green">'+stepsText()+' 步</div></div></div>'
+ +'<div class="card"><h3>呼吸风险 <span>'+st.text+'</span></h3>'+rows([['状态',st.text,st.cls],['本周告警',st.alerts,'green'],['最近提醒',FAMILYNOTICES.length?FAMILYNOTICES[0].t:'暂无','orange']])+'</div>'
+ +'<div class="card"><h3>摔倒确认</h3>'+(FALLNOTICES.length?rows(FALLNOTICES.slice(0,5).map(function(r){return [r.t,'摔倒 '+r.g+'G · 已自行确认','green'];})):rows([['暂无记录','--']]))+'</div>'
+ +'<div class="card"><h3>健康提醒</h3>'+(FAMILYNOTICES.length?rows(FAMILYNOTICES.slice(0,5).map(function(r){return [r.t,r.text,'orange'];})):rows([['暂无提醒','--']]))+'</div>'
+ +section('快捷操作')
+ +fcard('🔔','通知与日报','每日8点',"show('d_notify')",'accent-green')
+ +fcard('⌚','测试手环提醒','发送一条',"testBand()",'accent-green')
+ +fcard('🫁','模拟一次异常','演示用',"brDemo()",'accent-orange')
+ +'<div class="tip">🫁 呼吸风险只在子女端显示和提醒，妈妈手机上看不到。</div>';};
+S['settings']=function(){var ui=userInfo();var t=THRESH;
+  return ''
+  +'<div class="home-head"><div class="hi">设置</div><div class="sub">'+connText()+' · 电量'+battText()+'</div><div class="date">当前身份 · '+(ROLE==='child'?'子女端':'老人端')+'</div></div>'
+  +section('设备')
+  +fcard('⌚','绑定手环','维亿魄 H600 · '+connText(),"bridgeRescan()",'accent-green')
+  +section('个人信息')
+  +'<div class="card"><div class="cardtitle"><span class="ico">🧍</span><span>身体信息</span><span class="sub">用于身体成分</span></div><div class="fgrid"><div><div class="mini">性别</div><select class="inp" id="ui_sex"><option value="男"'+(ui.sex=='男'?' selected':'')+'>男</option><option value="女"'+(ui.sex=='女'?' selected':'')+'>女</option></select></div><div><div class="mini">身高cm</div><input class="inp" id="ui_h" type="number" value="'+ui.h+'"></div><div><div class="mini">体重kg</div><input class="inp" id="ui_w" type="number" value="'+ui.w+'"></div><div><div class="mini">年龄</div><input class="inp" id="ui_age" type="number" value="'+ui.age+'"></div></div><div class="mbtn" onclick="saveUserInfo()">保存并同步到手环</div></div>'
+  +section('紧急联系人')
+  +'<div class="card"><div class="cardtitle"><span class="ico">📞</span><span>家人电话</span><span class="sub">报警短信用</span></div><input class="inp" id="em_p1" type="tel" placeholder="例如 13812345678" value="'+(localStorage.getItem('fg_em1')||'')+'"><input class="inp" id="em_p2" type="tel" placeholder="选填" value="'+(localStorage.getItem('fg_em2')||'')+'"><div class="mbtn" onclick="saveFamily()">保存家人电话</div></div>'
+  +section('告警阈值')
+  +'<div class="card"><div class="cardtitle"><span class="ico">🚨</span><span>提醒阈值</span><span class="sub">保存后立即生效</span></div><div class="fgrid"><div><div class="mini">血氧低于%</div><input class="inp" id="th_spo2" type="number" value="'+t.spo2+'"></div><div><div class="mini">心率高于</div><input class="inp" id="th_hrhigh" type="number" value="'+t.hrHigh+'"></div><div><div class="mini">心率低于</div><input class="inp" id="th_hrlow" type="number" value="'+t.hrLow+'"></div></div><div class="fgrid" style="margin-top:8px"><div><div class="mini">血糖低于</div><input class="inp" id="th_sugar" type="number" step="0.1" value="'+t.sugarLow+'"></div><div><div class="mini">摔倒达到G</div><input class="inp" id="th_fall" type="number" step="0.1" value="'+t.fallG+'"></div></div><div class="mbtn" onclick="saveThresh()">保存告警阈值</div></div>'
+  +section('提醒开关')
+  +'<div class="card"><div class="cardtitle"><span class="ico">🔔</span><span>提醒开关</span><span class="sub">可随时开关</span></div>'+rows([
+   ['高心率提醒','<span id="tg_hrv1" class="green" onclick="tg(\'tg_hrv1\')">开</span>'],
+   ['低血氧提醒','<span id="tg_spo1" class="green" onclick="tg(\'tg_spo1\')">开</span>'],
+   ['充电豁免','<span id="tg_charge" class="green" onclick="tg(\'tg_charge\')">开</span>'],
+   ['低电量提醒','<span id="tg_batt" class="green" onclick="tg(\'tg_batt\')">开</span>']
+  ])+'</div>'
+  +section('用药提醒')
+  +fcard('💊','用药提醒','设置用药时间',"show('d_meds')",'accent-orange')
+  +section('云端数据')
+  +'<div class="card">'+rows([
+   ['健康数据上传（用于算法改进）','<span id="tg_log" class="'+(logUpOn()?'green':'red')+'" onclick="tgLog()">'+(logUpOn()?'开':'关')+'</span>']
+  ])+'</div>'
+  +section('手环管理')
+  +'<div class="tip">⏰ 心率/血氧5分钟；血压/体温/血糖/压力/HRV约30分钟；睡眠按小时读取。</div>';};
+S['d_heart']=function(){var b=(D.hr==null)?['等待数据','info']:['正常','ok'];return head('心率','❤️')+hero(hrText()+'<small> 次/分</small>','自动测量 · 每5分钟一次',b[0],b[1])+'<div class="card"><h3>最近7天 · 平均心率 <span>次/分</span></h3>'+histBars('hr')+'</div><div class="card"><h3>心率连续波形图</h3>'+seqLine('hr','#E8402A',5,60)+'<div class="legend"><span><i style="background:#E8402A"></i>心率</span><span>每5分钟一个点</span></div></div><div class="card"><h3>提醒与数据</h3>'+rows([['高心率提醒','<span id="tg_hr" class="green" onclick="tg(\'tg_hr\')">开</span>'],['触发条件','连续≥'+THRESH.hrHigh+'次/分'],['采样频率','每5分钟一次']])+'</div>'+fr('d_heart_data','📊','全部数据','连续数值')+fr('d_about_heart','📖','了解心率','科普')+'<div class="tip">❤️ 心脏每分钟跳几下。安静时太快、太慢，都会提醒家人。</div>';};
+S['d_heart_data']=function(){var b=(D.hr==null)?['等待数据','info']:['正常','ok'];return head('心率 · 全部数据','📊')+hero(hrText()+'<small> 次/分</small>','最近7天 · 共'+recVals('hr').length+'条记录',b[0],b[1])+'<div class="card">'+rows(recRows('hr','次/分'))+'</div><div class="tip">📊 显示今天最近10条；数据每5分钟自动记录一次。</div>';};
+S['d_about_heart']=function(){return head('了解心率','📖')+'<div class="card"><h3>心率解释</h3><div class="para">心率是指心脏每分钟跳动的次数，成年人安静状态下的心率一般为 55～80 次/分钟，其通常会因年龄、性别或其他生理因素产生个体差异。运动时心跳会加速，心肺功能较好的运动员心率通常会比普通成人的心跳要慢。</div></div><div class="card"><h3>心率区间</h3><div class="para">· 最大心率的50%-60%为热身区间，适用于跑步前的动态热身、跑步后的放松活动。<br/>· 61%-70%为燃脂区间，身体主要通过燃烧脂肪的方式为运动供能。<br/>· 71%-80%为有氧区间，能有效锻炼心肺功能。<br/>· 81%-90%为无氧区间，乳酸堆积量增加。<br/>· 91%-100%为极限区间，心脏负担很大。低于最大心率50%的数据不在区间中统计。</div></div><div class="card"><h3>静息心率</h3><div class="para">静息心率，又称为安静心率，是指在清醒、不活动的安静状态下，每分钟心跳的次数。依靠运动使心功能得到锻炼、保持适当体重、戒烟与限酒等均可使静息心率保持在一个相对缓慢而稳定的区间。</div></div><div class="card"><h3>心率变化</h3><div class="para">安静状态下心率超过160次/分钟，或低于40次/分钟的现象大多见于心脏疾病患者，如伴随心悸、胸闷等不适感，应及早进行详细检查。</div></div><div class="card"><h3>正确看待心率变化</h3><div class="para">很多人都会有窦性心动过缓伴不齐，对于多数人来说是正常的，不必过于担心。安静状态下成年人的心率若在50～60次/分钟一般不会出现明显症状。但出现胸闷、乏力、头晕等不适，应立即到医院进一步检查。</div></div><div class="card"><h3>心率相关建议</h3><div class="para">· 养成良好的生活和作息方式，避免或减少熬夜、饮酒、喝浓茶和吸烟等行为。<br/>· 保持良好的运动习惯，建议每周至少坚持3次运动，每次运动30～60分钟。<br/>· 保持适当体重，调节饮食习惯，避免因肥胖导致心脏负担增加。<br/>· 保持平和的心态，避免因着急、生气、紧张等因素导致心率过快。<br/>· 若因高血压、冠心病等疾病导致心率加快，可遵医嘱服用药物。</div></div><div class="tip">⚠️ 心率监测仅用于参考，不能用于诊断或治疗任何疾病，如有担心请咨询专业医疗人士。</div>';};
+S['d_spo2']=function(){var b=(D.spo2==null)?['等待数据','info']:['正常','ok'];return head('血氧','<span class="o2">O₂</span>')+hero(spo2Text()+'<small> %</small>','自动测量 · 每5分钟一次',b[0],b[1])+'<div class="card"><h3>最近7天 · 平均血氧 <span>%</span></h3>'+histBars('spo2')+'</div><div class="card"><h3>血氧连续波形图</h3>'+seqLine('spo2','#2E9E63',10,90)+'<div class="legend"><span><i style="background:#2E9E63"></i>血氧</span><span>每5分钟一个点</span></div></div><div class="card"><h3>提醒与数据</h3>'+rows([['低血氧提醒','<span id="tg_so" class="green" onclick="tg(\'tg_so\')">开</span>'],['触发条件','连续≤'+THRESH.spo2+'%'],['采样频率','每5分钟一次']])+'</div>'+fr('d_spo2_data','📊','全部数据','连续数值')+fr('d_about_spo2','📖','了解血氧','科普')+'<div class="tip"><span class="o2">O₂</span> 血氧低，说明呼吸供氧不足。连续低于预警值，App 会通知家人。</div>';};
+S['d_spo2_data']=function(){var b=(D.spo2==null)?['等待数据','info']:['正常','ok'];return head('血氧 · 全部数据','📊')+hero(spo2Text()+'<small> %</small>','最近7天 · 共'+recVals('spo2').length+'条记录',b[0],b[1])+'<div class="card">'+rows(recRows('spo2','%'))+'</div><div class="tip">📊 显示今天最近10条；数据每5分钟自动记录一次。</div>';};
+S['d_about_spo2']=function(){return head('了解血氧','📖')+'<div class="card"><h3>血氧饱和度</h3><div class="para">血氧饱和度是血液中被氧结合的氧合血红蛋白的容量占全部可结合的血红蛋白容量的百分比，即血液中血氧的浓度，它是呼吸循环的重要生理参数。理想情况下，血氧饱和度应为95%-100%；但受个人身体状态、海拔、某些疾病等影响会有不同。</div></div><div class="card"><h3>过低血氧</h3><div class="para">当一段时间内检测到您的血氧饱和度低于设定的提醒值，设备会提醒您留意当前健康状况并记录该段数据。如果您同时出现呼吸急促、头疼疲乏、注意力降低等情况，建议寻求专业的医务人员帮助。</div></div><div class="tip">⚠️ 可穿戴设备获取的血氧数据值仅供参考，如有任何不适，请务必前往医院咨询专业的医疗人士。</div>';};
+S['d_bp']=function(){var bs=bpStatus();return head('血压','🩸')+hero(bpText(),'自动测量 · 每30分钟一次',bs[0],bs[1])+'<div class="card"><h3>最近7天 · 血压</h3><div class="legend"><span><i style="background:#E8402A"></i>高压</span><span><i style="background:#2E9E63"></i>低压</span></div>'+histBarsC('bph','#E8402A')+'<h3 style="margin-top:12px">最近7天 · 低压</h3>'+histBarsC('bpl','#2E9E63')+'</div><div class="card"><h3>血压连续波形图</h3>'+seqLine2('bph','bpl','#E8402A','#2E9E63',10,60)+'<div class="legend"><span><i style="background:#E8402A"></i>高压</span><span><i style="background:#2E9E63"></i>低压</span></div></div><div class="card"><h3>今天血压异常提示</h3>'+rows(bpTodayRows())+'</div>'+fr('d_bp_data','📊','全部数据','连续数值')+fr('d_about_bp','📖','了解血压','科普')+'<div class="tip">🩺 手环血压是参考值，不能代替医院血压计；连续看7天变化很有用。</div>';};
+S['d_bp_data']=function(){var bs=bpStatus();return head('血压 · 全部数据','📊')+hero(bpText(),'最近7天 · 共'+recVals('bph').length+'条记录',bs[0],bs[1])+'<div class="card">'+rows(recRowsBP())+'</div><div class="tip">📊 显示今天最近10条；数据每30分钟自动记录一次。</div>';};
+S['d_about_bp']=function(){return head('了解血压','📖')+'<div class="card"><h3>名词解释</h3><div class="para">血压是血液循环对身体动脉壁的压力。由两个数值组成，收缩压显示心脏收缩或跳动时的血管压力，俗称高压；舒张压显示心脏在两次跳动之间舒张时血管压力，俗称低压。</div></div><div class="card"><h3>血压水平分类</h3><div class="para">· 正常血压：高压低于120 且 低压低于80。<br/>· 正常高值：高压120~139 和（或）低压80~89。<br/>· 高血压：高压≥140 和（或）低压≥90。</div></div><div class="card"><h3>低血压</h3><div class="para">低血压尚无明确定义。一般认为成年人高压低于90，低压低于60即为血压偏低。</div></div><div class="tip">⚠️ 以上内容仅供参考，不能作为诊断或治疗依据。</div>';};
+S['d_sugar']=function(){var vals=recVals('sugar');var v=D.sugar;var mgv=vals.map(function(x){return Math.round(x*10)/10;});
+var cur=(v==null)?(mgv.length?String(mgv[mgv.length-1]):'--'):String(Math.round(v*10)/10);
+var st=((v==null&&mgv.length==0)?['等待数据','info']:(v==null?['参考','ok']:(v<3.9?['偏低','orange']:(v>10?['偏高','orange']:['参考范围','ok']))));
+var pairs=[],pi;for(pi=D.recs.length-1;pi>=0&&pairs.length<10;pi--){var rr=D.recs[pi];if(rr.sugar!=null)pairs.unshift([rr.t,rr.sugar]);}var allsg=rowPts('sugar');var chart=(allsg.length>=2)?lcA(allsg.map(function(pr){return {m:pr.m,v:Math.round(pr.v*10)/10};}),Math.min.apply(null,allsg.map(function(pr){return Math.round(pr.v*10)/10;}))-8,Math.max.apply(null,allsg.map(function(pr){return Math.round(pr.v*10)/10;}))+8,'#B06A2C',0):'';
+var day7=D.hist.map(function(h){return h.sugar!=null?[String(Math.round(h.sugar*10)/10),Math.max(8,Math.min(92,Math.round(h.sugar*10)/3))]:['--',4];});
+var srows=[],i;for(i=D.recs.length-1;i>=0&&srows.length<150;i--){var r=D.recs[i];if(r.sugar!=null)srows.push([r.t,Math.round(r.sugar*10)/10+' 毫摩尔/升']);}
+if(!srows.length)srows.push(['暂无数据','--']);
+return head('血糖','🍚')+hero(cur+'<small> 毫摩尔/升</small>','自动测量 · 每30分钟一次 · 手环估算值',st[0],st[1])
+
++'<div class="card"><h3>最近7天 · 血糖 <span>毫摩尔/升</span></h3>'+bars(day7,null,D.hist.map(function(h){return h.d;}))+'</div>'
++(chart?'<div class="card"><h3>血糖连续波形图</h3>'+chart+'<div class="legend"><span><i style="background:#B06A2C"></i>血糖</span><span>每30分钟一个点 · 标注为最高/最低</span></div></div>':'')
++fr('d_sugar_data','📊','全部数据','连续数值')+fr('d_about_sugar','📖','了解血糖','科普')
++'<div class="tip">🍚 手环血糖是光学估算，只看趋势；确诊或调药请听医生。</div>';};
+S['d_sugar_data']=function(){var v=D.sugar;return head('血糖 · 全部数据','📊')+hero((v==null?'--':String(Math.round(v*10)/10))+'<small> 毫摩尔/升</small>','最近7天记录（最新在前）','参考','ok')+'<div class="card">'+rows((function(){var out=[],i;for(i=D.recs.length-1;i>=0&&out.length<200;i--){var r=D.recs[i];if(r.sugar!=null)out.push([r.t,Math.round(r.sugar*10)/10+' 毫摩尔/升']);}if(!out.length)out.push(['暂无数据','--']);return out;})())+'</div><div class="tip">📊 只显示有真实测量的记录；没测到的轮次不显示。</div>';};
+S['d_acc']=function(){return head('跌倒监测','🛡')+'<div class="tip">🛡 手环实时监测合加速度。静止约1G；达到2.5G先手环震动+手机确认，30秒没确认自动短信+打电话。2分钟内不重复报。</div>'+'<div class="card"><h3>实时读数</h3>'+rows([['合加速度',(D.accG==null?'--':D.accG+' G'),'green'],['X 轴',(D.accX==null||D.accX==-9999)?'--':String(D.accX)],['Y 轴',(D.accY==null||D.accY==-9999)?'--':String(D.accY)],['Z 轴',(D.accZ==null||D.accZ==-9999)?'--':String(D.accZ)],['状态',(D.accG!=null&&D.accG>2.5)?'⚠ 疑似跌倒！':'监测中…',(D.accG!=null&&D.accG>2.5)?'orange':'green']])+'</div>'+'<div class="card"><h3>报警动作</h3>'+rows([['1','手环震动 + 手机确认'],['2','30秒没确认：短信+打电话'],['3','点“我需要帮助”：立即短信+打电话']])+'</div>'+'<div class="tip">🛡 手环连接后自动开启；如果实时读数一直无数据，点下面的按钮手动开启。</div><div class="bigbtn" onclick="toggleFall()">开启/重启监测<small>点一下就行</small></div>';};
+S['d_temp']=function(){var b=(D.temp==null)?['等待数据','info']:((D.temp>=35.5&&D.temp<=37.5)?['正常范围','ok']:['异常','orange']);var chart=seqLineDots('temp','#E8402A',36,34.5,37.5);var hb=histBars('temp');return head('体温','🌡')+hero(_n(D.temp)+'<small> ℃</small>','自动测量 · 每30分钟一次',b[0],b[1])+'<div class="card"><h3>今天波形</h3>'+chart+'<div class="legend"><span><i style="background:#E8402A"></i>体温</span><span>仅显示实际测量点（每30分钟一次） · 标注为最高/最低</span></div></div><div class="card"><h3>最近7天 · 体温 <span>℃</span></h3>'+hb+fr('d_temp_data','📊','全部数据','连续数值')+'<div class="tip">🌡 体温是手环光学估算，用于看趋势；发烧请用体温计确认。</div>';};
+S['d_temp_data']=function(){var b=(D.temp==null)?['等待数据','info']:['正常','ok'];return head('体温 · 全部数据','📊')+hero(_n(D.temp)+'<small> ℃</small>','最近7天记录（最新在前）',b[0],b[1])+'<div class="card">'+rows((function(){var out=[],i;for(i=D.recs.length-1;i>=0&&out.length<200;i--){var r=D.recs[i];if(r.temp!=null)out.push([r.t,Math.round(r.temp*10)/10+' ℃']);}if(!out.length)out.push(['暂无数据','--']);return out;})())+'</div><div class="tip">📊 只显示有真实测量的记录；没测到的轮次不显示。</div>';};
+S['d_hrv']=function(){var hc=hrvCur();var b=D.hrvUnsup?['此手环不支持','info']:((hc==null)?['等待数据','info']:['正常范围','ok']);var chart=D.hrvUnsup?'<div class="tip">ℹ️ 手环功能列表显示不支持HRV测量，不再显示不可靠数值。</div>':seqLine('hrv','#7C6BF0',10,20);var hb=D.hrvUnsup?'<div class="tip">📊 不支持</div>':histBars('hrv');return head('HRV','📈')+hero(D.hrvUnsup?'--':_n(hc)+'<small> 毫秒</small>','自动测量 · 每30分钟一次',b[0],b[1])+'<div class="card"><h3>最近7天 · HRV <span>毫秒</span></h3>'+hb+'</div><div class="card"><h3>HRV连续波形图</h3>'+chart+'<div class="legend"><span><i style="background:#7C6BF0"></i>HRV</span><span>每30分钟一个点</span></div></div>'+fr('d_hrv_data','📊','全部数据','连续数值')+fr('d_about_hrv','📖','了解HRV','科普')+'<div class="tip">📈 HRV 不单独报警，主要给医生看长期趋势。</div>';};
+S['d_hrv_data']=function(){var b=D.hrvUnsup?['此手环不支持','info']:((D.hrv==null)?['等待数据','info']:['正常','ok']);return head('HRV · 全部数据','📊')+hero(D.hrvUnsup?'--':_n(D.hrv)+'<small> 毫秒</small>','最近7天 · 共'+recVals('hrv').length+'条记录',b[0],b[1])+'<div class="card">'+(D.hrvUnsup?rows([['说明','此手环不支持HRV测量','orange']]):rows(recRows('hrv','毫秒')))+'</div><div class="tip">📊 数据每30分钟自动记录一次。</div>';};
+S['d_about_sugar']=function(){return head('了解血糖','📖')+'<div class="card"><h3>血糖是什么</h3><div class="para">血糖是血液中的葡萄糖，是身体最主要的能量来源之一。一般成年人空腹血糖参考范围为 3.9～6.1 毫摩尔/升，餐后2小时血糖一般不超过 7.8 毫摩尔/升。</div></div><div class="card"><h3>血糖偏高</h3><div class="para">血糖持续偏高常见于糖尿病或糖调节异常，可能伴有多饮、多尿、容易饿、乏力等表现。老年人血糖波动大，建议结合指尖血糖仪或医院检查确认。</div></div><div class="card"><h3>血糖偏低</h3><div class="para">血糖低于 3.9 毫摩尔/升属于低血糖，可能出现心慌、出汗、手抖、头晕，严重时会意识模糊。老年人低血糖比高血糖更紧急，反复出现应及时就医。</div></div><div class="card"><h3>手环血糖说明</h3><div class="para">手环血糖是光学估算值，受佩戴松紧、肤色、运动等因素影响，只能用来看趋势，不能代替指尖血糖仪和医院的静脉血糖检查，也不能作为调药依据。</div></div><div class="tip">⚠️ 本页内容仅供参考，不能用于诊断或治疗；如有疑问请咨询医生。</div>';};
+S['d_about_hrv']=function(){return head('了解HRV','📖')+'<div class="card"><h3>HRV是什么</h3><div class="para">HRV（心率变异性）指每次心跳之间时间间隔的变化程度，反映身体自主神经系统（交感神经与副交感神经）的平衡状态。</div></div><div class="card"><h3>数值怎么看</h3><div class="para">一般成年人静息 HRV 多在 20～100 毫秒之间，个体差异很大。HRV 较高通常说明身体恢复能力较好、比较放松；HRV 偏低可能与疲劳、紧张、睡眠不足、年龄增长等因素有关。</div></div><div class="card"><h3>什么时候需要留意</h3><div class="para">单次偏低不必紧张。如果 HRV 在一段时间内明显持续下降，并且伴随心慌、胸闷、明显疲劳等不舒服，建议尽早就医检查。</div></div><div class="card"><h3>怎么改善</h3><div class="para">规律作息、充足睡眠、适度运动、放松训练（如深呼吸、冥想）都有助于提高 HRV。避免熬夜、过量饮酒和长期精神紧张。</div></div><div class="tip">⚠️ HRV 只是辅助参考指标，不能单独用来诊断疾病，如有担心请咨询专业医疗人士。</div>';};
+S['d_sleep']=function(){var b=sleepBadge(D.sleepMin);return head('睡眠','🌙')+hero(sleepHero(),'整夜自动记录 · 醒来看结果',b[0],b[1])+sleepSegCard()+'<div class="card"><h3>睡眠结构</h3>'+rows(slStructRows())+'</div><div class="card"><h3>最近7天 · 睡眠时长</h3>'+histBars('sleep',fmtMin)+'</div>'+fr('d_sleep_data','📊','全部数据','每天时长')+fr('d_about_sleep','📖','了解睡眠','科普')+'<div class="tip">⏱ 手环的入睡/醒来时间靠翻身判断，偶尔会比实际晚一点，时长累计更可靠。</div>';};
+S['d_sleep_data']=function(){var b=sleepBadge(D.sleepMin);var out=[],i;for(i=D.hist.length-1;i>=0;i--){var r=D.hist[i];out.push([r.d,(r.sleep==null)?'--':fmtMin(r.sleep)]);}if(!out.length)out.push(['暂无数据','--']);return head('睡眠 · 全部数据','📊')+hero(sleepHero(),'最近'+D.hist.length+'天',b[0],b[1])+'<div class="card">'+rows(out)+'</div><div class="tip">📊 数据从今晚开始积累，每天自动记录。</div>';};
+S['d_about_sleep']=function(){return head('了解睡眠','📖')+'<div class="card"><h3>名词解释</h3><div class="para">睡眠并非简单的“关机休息”，而是人体复杂且活跃的生理修复过程。睡眠周期是指从浅睡到深睡再到浅睡的完整循环，成年人每夜通常经历4-6个周期。</div></div><div class="card"><h3>睡眠周期</h3><div class="para">· <b>入睡期（约5%）</b>：清醒与睡眠之间的过渡，非常浅眠，易被唤醒。<br/>· <b>浅睡期（约50%）</b>：占比最长的阶段，是进入深度睡眠的“缓冲区”。<br/>· <b>深睡期（约15-25%）</b>：睡眠的“黄金修复期”，身体进行最彻底的放松与修复。<br/>· <b>快速眼动睡眠期（约20-25%）</b>：大脑变得异常活跃，大多数梦境发生于此。</div></div><div class="card"><h3>睡眠质量</h3><div class="para">优质睡眠的特征：入睡时间不超过30分钟；夜间醒来不超过1次，且醒后能迅速重新入睡；深睡和REM睡眠比例适当；早晨醒来感觉精神焕发。</div></div><div class="card"><h3>影响睡眠质量的因素</h3><div class="para">· 作息规律：每天大致相同的时间上床和起床。<br/>· 睡眠环境：黑暗、安静、温度适宜（约18-22℃）。<br/>· 睡前习惯：避免蓝光暴露、咖啡因和大量进食。<br/>· 日间活动：适量的运动有助于夜间睡眠，但睡前剧烈活动可能适得其反。</div></div><div class="tip">⚠️ 以上内容仅供参考，不能作为诊断或治疗依据。</div>';};
+S['d_stress']=function(){var vals=recVals('stress');var v=D.stress;var cur=(v==null)?(vals.length?String(vals[vals.length-1]):'--'):String(v);
+var st=(v==null&&vals.length==0)?['等待数据','info']:[stressLabel(v==null?(vals.length?vals[vals.length-1]:null):v),(v==null?'info':(v<40?'green':(v<60?'green':(v<80?'orange':'red'))))];
+var spairs=[],si;for(si=D.recs.length-1;si>=0&&spairs.length<10;si--){var sr=D.recs[si];if(sr.stress!=null)spairs.unshift([sr.t,sr.stress]);}var allst=rowPts('stress');var chart=(allst.length>=2)?lcA(allst.map(function(pr){return {m:pr.m,v:pr.v};}),0,Math.max(60,Math.max.apply(null,allst.map(function(pr){return pr.v;}))+5),'#3FBF7F',0):'';
+var day7=D.hist.map(function(h){return h.stress!=null?[String(h.stress),Math.max(8,Math.min(92,h.stress))]:['--',4];});
+var pct=(v==null)?0:Math.max(0,Math.min(100,v));
+var scale='<div class="gradwrap"><div class="gradbar">'
++'<div style="width:40%;background:#3FBF7F"></div><div style="width:20%;background:#8FCB6B"></div><div style="width:20%;background:#F7B32B"></div><div style="width:20%;background:#E8402A"></div></div>'
++'<div class="gradmark" style="left:'+pct+'%"><span>'+(v==null?'--':Math.round(v))+'</span></div>'
++'<div class="gradlabs"><span>放松 0-39</span><span>正常 40-59</span><span>中等 60-79</span><span>偏高 80+</span></div></div>';
+var srows=[],i;for(i=D.recs.length-1;i>=0&&srows.length<200;i--){var r=D.recs[i];if(r.stress!=null)srows.push([r.t,r.stress+' 分']);}
+return head('压力','🧘')+hero(cur+'<small> 压力值(0-100)</small>','自动测量 · 每30分钟一次',st[0],st[1])
++'<div class="card"><h3>分级</h3>'+scale+'</div>'
+
++'<div class="card"><h3>最近7天 · 压力</h3>'+bars(day7,null,D.hist.map(function(h){return h.d;}))+'</div>'
++(chart?'<div class="card"><h3>今天波形</h3>'+chart+'<div class="legend"><span><i style="background:#3FBF7F"></i>压力</span><span>每30分钟一个点 · 标注为最高/最低</span></div></div>':'')
+
++fr('d_stress_data','📊','全部数据','连续7天记录')
++'<div class="tip">🧘 压力值越低越放松；持续偏高建议休息调整。</div>';};
+S['d_stress_data']=function(){var v=D.stress;
+var day7=D.hist.map(function(h){return h.stress!=null?[String(h.stress),Math.max(8,Math.min(92,h.stress))]:['--',4];});
+var srows=[],i;for(i=D.recs.length-1;i>=0&&srows.length<300;i--){var r=D.recs[i];if(r.stress!=null)srows.push([r.t,r.stress+' 分']);}
+if(!srows.length)srows.push(['暂无数据','--']);
+return head('压力 · 全部数据','📊')+hero((v==null?'--':String(v))+'<small> 当前压力值</small>','连续记录（最近7天 · 最新在前）',stressLabel(v),'ok')
++'<div class="card">'+rows(srows)+'</div>'
++'<div class="tip">📊 记录保留最近7天；每天由多次测量汇总。</div>';};
+S['d_activity']=function(){var b=(D.steps==null)?['等待数据','info']:['完成 '+Math.min(100,Math.round(D.steps*100/GOAL))+'%','ok'];var ui=userInfo();var strideM=(ui.sex==='女'?0.413:0.415)*(ui.h||170)/100;var dist=(D.dis!=null&&D.dis>0)?(D.dis/1000).toFixed(2)+' 公里':((D.steps>0)?(D.steps*strideM/1000).toFixed(2)+' 公里（按身高+步数估算）':'--');return head('每日运动','🚶')+hero(stepsText()+'<small> 步</small>',updLab('目标 '+GOAL+' 步 · 等待数据'),b[0],b[1])+'<div class="card"><h3>最近7天 · 步数</h3>'+stepsBars()+'</div><div class="card"><h3>今天的活动</h3>'+rows([['📍 距离',dist],['🔥 卡路里',(D.kcal==null?'--':D.kcal+' 千卡')]])+'</div>'+fr('d_activity_data','📊','全部数据','每天步数')+'<div class="tip">🔥 卡路里由手环按步数+同步的身体数据（身高/体重/年龄/性别）自动计算；设置→个人信息里填得越准，卡路里越准。📍 距离按身高/性别和步数估算，手环有实测距离时优先显示实测。</div>';};
+S['d_activity_data']=function(){var b=(D.steps==null)?['等待数据','info']:['完成 '+Math.min(100,Math.round(D.steps*100/GOAL))+'%','ok'];var out=[],i;var a=histStepsFix();for(i=D.hist.length-1;i>=0;i--){var r=D.hist[i];out.push([r.d,(a[i]==null)?'--':(a[i]+' 步'+(r.d===_todayMD()?'（实时）':''))]);}if(!out.length)out.push(['暂无数据','--']);return head('每日运动 · 全部数据','📊')+hero(stepsText()+'<small> 步</small>','最近'+D.hist.length+'天',b[0],b[1])+'<div class="card">'+rows(out)+'</div><div class="tip">📊 今天的步数取实时同步数据，前几天为当天累计记录。</div>';};
+function microHist(){try{return JSON.parse(localStorage.getItem('fg_micro_hist'))||[];}catch(e){return [];}}
+function hmOf(d){return ('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2);}
+function startMicro(){try{if(window.AndroidBridge&&AndroidBridge.micro){AndroidBridge.micro();toast('指令已发送，请在手环旁保持不动');}else{toast('手环服务未就绪');}}catch(e){toast('启动失败');}}
+function setMicroProg(p){D.microProg=p;refresh();}
+function setMicroResult(json){try{var r=JSON.parse(json);if(!r.err){r.t=Date.now();D.micro=r;var h=microHist();h.unshift(JSON.parse(JSON.stringify(r)));if(h.length>7)h.length=7;try{localStorage.setItem('fg_micro_hist',JSON.stringify(h));}catch(e){}}}catch(e){}D.microProg=null;refresh();}
+S['d_micro']=function(){var prog=(D.microProg!=null&&D.microProg>=0)?'<div class="card"><h3>测量中… '+D.microProg+'%</h3><div class="tl"><div style="width:'+Math.max(4,D.microProg)+'%;background:#7C6BF0"></div></div><div class="tip">⏱ 手环戴好，坐着别动，约1~2分钟。</div></div>':'';var r=D.micro||microHist()[0];var last=r?'<div class="card"><h3>最近一次结果</h3>'+rows([['⏱ 时间',hmOf(new Date(r.t))],['❤️ 心率',r.hr+' 次/分',bcl(r.hr,60,100)],['🩸 血氧',r.spo2+'%',bcl(r.spo2,95,100)],['🧘 压力',r.stress,bcl(r.stress,0,59)],['🍚 血糖',r.sugarMmol+' 毫摩尔/升',bcl(r.sugarMmol,3.9,6.1)],['🌡 体温',r.temp+' ℃',bcl(r.temp,35.5,37.5)],['🩸 血压',r.bph+'/'+r.bpl,(r.bph<130&&r.bpl<85)?'green':'orange'],['📈 HRV',r.hrv+' 毫秒',bcl(r.hrv,40,400)]])+'</div>':'<div class="tip">还没有微体检记录，点下面按钮开始。</div>';return head('微体检报告','📋')+'<div class="card"><h3>什么是微体检</h3><div class="para">手环一轮综合检测：心率、血氧、压力、血糖、血压、HRV，约1~2分钟。测之前戴好手环、坐好别动。</div></div>'+prog+last+((r&&r.uricAcid!=null)?'<div class="card"><h3>血液健康</h3>'+rows([['🧪 尿酸',r.uricAcid+' 微摩尔/升',bcl(r.uricAcid,150,430)],['总胆固醇',r.tcho+' 毫摩尔/升',bcl(r.tcho,2.8,5.7)],['甘油三酯',r.tag+' 毫摩尔/升',bcl(r.tag,0.45,1.7)],['高密度脂蛋白',r.hdl+' 毫摩尔/升',bcl(r.hdl,1.0,99)],['低密度脂蛋白',r.ldl+' 毫摩尔/升',bcl(r.ldl,0,3.4)]])+'</div>':'')+((r&&r.bmi!=null)?'<div class="card"><h3>身体成分</h3>'+rows([['⚖️ BMI',r.bmi],['体脂率',r.bfr+'%','green'],['💪 肌肉量',r.muscle+' 公斤','green'],['体水分',r.water+'%','green'],['🦴 骨量',r.bone+' 公斤','green'],['蛋白质',r.protein+' 公斤','green'],['🔥 基础代谢',r.bmr+' 千卡','green']])+'</div>':'')+((r&&(r.fatigue!=null||r.depression!=null||r.skinWater!=null))?'<div class="card"><h3>心理与状态</h3>'+rows([['😊 情绪',((r.emotion==null&&r.seEmotion==null)?'--':(r.emotion!=null?r.emotion:r.seEmotion))],['😵 疲劳度',(r.fatigue==null?'--':r.fatigue)],['抑郁风险',(r.depression==null?'--':(r.depression===0||r.depression==='0'||r.depression==='低'?'低':(r.depression===1||r.depression==='1'||r.depression==='中'?'中':(r.depression===2||r.depression==='2'||r.depression==='高'?'高':r.depression))))],['💧 皮肤含水量',(r.skinWater==null?'--':r.skinWater+'%')],['交感神经活跃度',(r.sympa==null?'--':r.sympa)],['皮质醇浓度',(r.cortisol==null?'--':r.cortisol+' 微克/升'),(r.cortisol==null?'':bcl(r.cortisol,0,200))]])+'</div>':'')+REFMICRO+'<div class="bigbtn" onclick="startMicro()">开始微体检<small>坐着别动 · 约1~2分钟出结果</small></div>'+fr('d_micro_data','📊','全部数据','以往报告')+'<div class="tip">📋 结果保存在手机里，可翻看最近几次对比；疾病诊断请以医院检查为准。</div>';};
+S['d_micro_report1']=function(){return head('微体检 · 昨天 08:10','📋')+'<div class="hero"><div class="v" style="font-size:40px">10<small> 项完成</small></div><div class="lab">昨天 08:10 · 全部正常</div><div class="badge ok">总体良好</div></div><div class="card"><h3>基础健康</h3>'+rows([['平均心率','74','green'],['HRV','38 毫秒','green'],['血压','118/82','green'],['血氧','98%','green'],['血糖','106','green']])+'</div><div class="card"><h3>血液健康</h3>'+rows([['尿酸','4.2','green'],['总胆固醇','120.5','green'],['甘油三酯','76.1','green'],['高密度脂蛋白','39.0','green'],['低密度脂蛋白','26.8','green']])+'</div><div class="card"><h3>心理与状态</h3>'+rows([['压力','14 放松','green'],['疲劳度','3 轻度','green'],['情绪','3 稳定','green']])+'</div><div class="tip">📋 每次报告都会保留，方便对比变化，也可以给医生看。</div>';};
+function ecgHist(){try{return JSON.parse(localStorage.getItem('fg_ecg_hist'))||[];}catch(e){return [];}}
+function startEcg(){try{if(window.AndroidBridge&&AndroidBridge.ecg){AndroidBridge.ecg();toast('指令已发送，手指捏住两个电极，保持不动，约30秒');}else{toast('手环服务未就绪');}}catch(e){toast('启动失败');}}
+function setEcgProg(p){D.ecgProg=p;refresh();}
+function setEcgResult(json){try{var r=JSON.parse(json);if(r&&r.wave&&typeof r.wave==='string'){try{r.wave=JSON.parse(r.wave);}catch(e){r.wave=null;}}if(!r.err){D.ecg=r;var h=ecgHist();h.unshift(r);if(h.length>7)h.length=7;try{localStorage.setItem('fg_ecg_hist',JSON.stringify(h));}catch(e){}}}catch(e){}D.ecgProg=null;refresh();}
+function ecgDetrend(vals){var win=Math.max(3,Math.floor(vals.length/40));var half=Math.floor(win/2);var out=[],i;for(i=0;i<vals.length;i++){var st=Math.max(0,i-half),en=Math.min(vals.length,i+half+1);var sum=0;for(var k=st;k<en;k++)sum+=vals[k];out.push(vals[i]-sum/(en-st));}return out;}
+
+function ecgWaveSvg(wv,opts){opts=opts||{};if(typeof wv==='string'){try{wv=JSON.parse(wv);}catch(e){wv=null;}}if(!wv)wv=[];var w=opts.w||640,hh=opts.hh||160,sw=opts.sw||1.4,maxPts=opts.maxPoints||w,seconds=(opts.seconds===undefined?10:opts.seconds);if(!wv||!wv.length)return'';var i,vals=[];for(i=0;i<wv.length;i++){var v=+wv[i];if(isFinite(v)&&Math.abs(v)<2147483000)vals.push(v);}if(!vals.length)return '<div class="tip">波形里都是占位值，暂不能画图</div>';vals=ecgDetrend(vals);if(seconds>0){var maxN=seconds*500;if(maxN>0&&vals.length>maxN)vals=vals.slice(0,maxN);}var sm=[];for(i=0;i<vals.length;i++){var a=vals[Math.max(0,i-1)],b=vals[i],c=vals[Math.min(vals.length-1,i+1)];sm.push((a+b+c)/3);}if(sm.length>maxPts){var bs=sm.length/maxPts,ds=[];for(i=0;i<maxPts;i++){var st=Math.floor(i*bs),en=Math.min(sm.length,Math.floor((i+1)*bs)+1);var sum=0;for(var k=st;k<en;k++)sum+=sm[k];var mid=sum/(en-st),pick=sm[st],best=-1;for(var k2=st;k2<en;k2++){var d=Math.abs(sm[k2]-mid);if(d>best){best=d;pick=sm[k2];}}ds.push(pick);}sm=ds;}var sort=sm.slice().sort(function(x,y){return x-y;});var lo=sort[Math.floor(sort.length*0.01)],hi=sort[Math.ceil(sort.length*0.99)-1];if(!(hi-lo>1e-6)){lo=sort[0];hi=sort[sort.length-1];}if(hi-lo<1e-6){lo-=10;hi+=10;}var pts='';for(i=0;i<sm.length;i++){var v2=Math.max(lo,Math.min(hi,sm[i]));var x=(sm.length>1)?(i*w/(sm.length-1)).toFixed(1):'0.0';var y=(hh-10-(v2-lo)*(hh-20)/(hi-lo)).toFixed(1);pts+=x+','+y+' ';}var grid='';for(var gx=0;gx<=w;gx+=40){grid+='<line x1="'+gx+'" y1="0" x2="'+gx+'" y2="'+hh+'" stroke="#F2D6D6" stroke-width="1"/>';}for(var gy=0;gy<=hh;gy+=20){grid+='<line x1="0" y1="'+gy+'" x2="'+w+'" y2="'+gy+'" stroke="#F2D6D6" stroke-width="1"/>';}return '<svg viewBox="0 0 '+w+' '+hh+'" style="width:100%;background:#fff;border:1px solid #E5E7EB;border-radius:8px"><rect width="'+w+'" height="'+hh+'" fill="#fff"/>'+grid+'<polyline points="'+pts.trim()+'" fill="none" stroke="#E8402A" stroke-width="'+sw+'" stroke-linejoin="round" stroke-linecap="round"/></svg>';}
+function userInfo(){var o={};try{o=JSON.parse(localStorage.getItem('fg_userinfo'))||{};}catch(e){}return {h:o.h||170,w:o.w||70,age:o.age||65,sex:o.sex||'男'};}
+function saveUserInfo(){try{var hh=+document.getElementById('ui_h').value,ww=+document.getElementById('ui_w').value,aa=+document.getElementById('ui_age').value,ss=document.getElementById('ui_sex').value;if(!hh||!ww||!aa){toast('请把身高、体重、年龄都填好');return;}localStorage.setItem('fg_userinfo',JSON.stringify({h:hh,w:ww,age:aa,sex:ss}));if(window.AndroidBridge&&AndroidBridge.setUserInfo){AndroidBridge.setUserInfo(hh,ww,aa,ss);toast('已保存，正在同步到手环…');}else{toast('已保存');}}catch(e){toast('保存失败');}}
+S['d_ecg']=function(){var prog=(D.ecgProg!=null&&D.ecgProg>=0)?'<div class="card"><h3>测量中… '+D.ecgProg+'%</h3><div class="tl"><div style="width:'+Math.max(4,D.ecgProg)+'%;background:#E8402A"></div></div><div class="tip">⏱ 手环戴紧，手指捏住两个电极，保持不动，持续30秒。</div></div>':'';var r=D.ecg;var wv=(r&&r.wave&&r.wave.length)?'<div class="card"><h3>心电图波形</h3>'+ecgWaveSvg(r.wave)+'<div class="legend"><span><i style="background:#E8402A"></i>心电波形</span><span>测量当时30秒记录</span></div></div>':'';var last=r?'<div class="card"><h3>最近一次记录</h3>'+rows([['⏱ 时间',hmOf(new Date(r.t))],['❤️ 平均心率',(r.hr==null?'--':r.hr+' 次/分'),'green'],['📈 HRV',(r.hrv==null?'--':r.hrv+' 毫秒'),'green'],...(r.br>0?[['🫁 呼吸率',r.br+' 次/分','green']]:[]),['QT间期',(r.qt==null?'--':r.qt)],...(r.press>0?[['压力指数',r.press]]:[]),...(r.fatig>0?[['疲劳指数',r.fatig]]:[]),['结果',r.type,(r.type&&r.type.indexOf('异常')>=0)?'orange':'green']])+'</div>'+(function(){var rk=[];if(r.myo!=null)rk.push(['🛡 心肌炎风险',(r.myo==0?'正常':String(r.myo)),(r.myo==0?'green':'orange')]);if(r.chd!=null)rk.push(['🫀 冠心病风险',(r.chd==0?'正常':String(r.chd)),(r.chd==0?'green':'orange')]);if(r.ang!=null)rk.push(['🩸 血管硬化风险',(r.ang==0?'正常':String(r.ang)),(r.ang==0?'green':'orange')]);if(r.dis!=null&&r.dis!=0)rk.push(['⚠ 综合疾病风险',String(r.dis),'orange']);if(!rk.length)return '';return '<div class="card"><h3>风险分析</h3>'+rows(rk)+'</div><div class="tip">⚠ 风险提示仅供辅助参考，不能替代医生诊断。</div>';})():'<div class="tip">还没有心电图记录，点下面按钮开始。</div>';return head('心电图','🫀')+prog+wv+last+'<div class="frow" onclick="saveEcgImg()"><div class="l">💾 保存完整心电图</div><div class="r">存到手机相册<span class="chev">›</span></div></div>'+'<div class="bigbtn" onclick="startEcg()">开始测量<small>手指捏住电极 · 持续30秒</small></div>'+fr('d_ecg_data','📊','全部数据','历史记录')+fr('d_about_ecg','📖','了解心电图','科普')+'<div class="tip">🫀 心电图是点一下测一次；如感觉胸闷心慌等不适，请及时就医。</div>';};
+S['d_ecg_view']=function(){var r=D.ecg;if(!r||!r.wave||!r.wave.length)return head('心电图 · 放大波形','🫀')+'<div class="tip">还没有可放大的波形</div>';return head('心电图 · 放大波形','🫀')+'<div class="card"><h3>完整波形（左右滑动看）</h3><div style="overflow-x:auto;white-space:nowrap">'+ecgWaveSvg(r.wave,{w:2400,hh:360,sw:1.8,maxPoints:1200,seconds:0})+'</div><div class="legend"><span><i style="background:#E8402A"></i>心电波形</span><span>左右滑动看完整记录</span></div></div>'+'<div class="tip">👀 这张是放大图；如果想看某一段，可以左右滑动。</div>';};
+S['d_ecg_data']=function(){var h=ecgHist();var list;if(h.length){list=h.map(function(x,i){var d=new Date(x.t);return rowC((d.getMonth()+1)+'月'+d.getDate()+'日 '+hmOf(d),x.type+(x.hr!=null?' · 心率'+x.hr+' 次/分':''),'green',"openHist('fg_ecg_hist',"+i+')');}).join('');}else{list='<div class="tip">📊 还没有心电图记录，去“心电图”页测一次。</div>';}return head('心电图 · 全部数据','📊')+'<div class="card"><h3>以往记录（点一条看详情）</h3>'+list+'</div><div class="tip">📊 保留最近7次记录；点任意一条可看当时的波形和数值。</div>';};
+S['d_about_ecg']=function(){return head('了解心电图','📖')+'<div class="card"><h3>心电图是什么</h3><div class="para">心脏跳动时会有微弱的电信号，心电图就是把这种电信号记录成的一条曲线。它能反映心跳的节律、快慢，以及有无常见的异常信号，是最常用的心脏检查之一。</div></div><div class="card"><h3>数值怎么看</h3><div class="para">· 平均心率：安静时一般 60～100 次/分。<br/>· HRV：40 毫秒以上较理想，越低越提示疲劳或紧张。<br/>· QT间期、波形细节：主要由医生解读，老人不必自己研究。<br/>· 结果提示“异常”：不用惊慌，只是提醒需要留意或复查；单次记录受手指松紧、呼吸、身体乱动影响很大。</div></div><div class="card"><h3>老年人常见情况</h3><div class="para">老年人比较常见的有心跳偏慢、早搏、房颤等。房颤会增加中风风险，值得重视；偶发早搏在健康老人中也很常见。手环记录只能做参考，提示异常时建议多测几次，并去医院做正规心电图。</div></div><div class="card"><h3>什么时候要及时就医</h3><div class="para">出现持续心慌、胸闷、胸痛、明显头晕、眼前发黑、气短等情况，不要等测量结果，尽快就医。</div></div><div class="tip">⚠️ 本页内容仅供参考，不能用于诊断；具体请听医生意见。</div>';};
+S['d_body_data']=function(){var h=histGet('fg_body_hist');var list;if(h.length){list=h.map(function(x,i){var d=new Date(x.t);return rowC((d.getMonth()+1)+'月'+d.getDate()+'日 '+hmOf(d),'BMI'+(x.bmi==null?'--':x.bmi)+' · 体脂'+(x.bfr==null?'--':x.bfr+'%')+' · 水分'+(x.water==null?'--':x.water+'%'),'green',"openHist('fg_body_hist',"+i+')');}).join('');}else{list='<div class="tip">📊 还没有身体成分记录，去“身体成分”页测一次。</div>';}return head('身体成分 · 全部数据','📊')+'<div class="card"><h3>以往报告（点一条看详情）</h3>'+list+'</div><div class="tip">📊 保留最近7次报告；点任意一条可看完整数值。</div>';};
+S['d_about_body']=function(){return head('了解身体成分','📖')+'<div class="card"><h3>各指标是什么</h3><div class="para">· BMI：体重和身高的比值，18.5～23.9 较合适。<br/>· 体脂率：脂肪占体重的比例，女 20～25%、男 15～20% 较好，偏高会增加心脏和血管负担。<br/>· 体水分：身体水分占比，50～65% 较好；偏低常见于喝水少、年龄增长或营养不足。<br/>· 肌肉量/骨量/蛋白质：会随年龄慢慢流失，是老年人最该留意的。<br/>· 基础代谢：身体安静时消耗的能量，偏低说明肌肉偏少。</div></div><div class="card"><h3>老年人要注意什么</h3><div class="para">老年人不要盲目追求“瘦”，重点是保住肌肉和骨头：每天吃够蛋白质（蛋、奶、鱼、瘦肉、豆制品），每天足量喝水，适当散步、晒太阳、做轻度力量活动。体脂偏高的人，先从每天多走路、少油少糖开始。</div></div><div class="card"><h3>怎么用这些数值</h3><div class="para">每周测一次看趋势就够了，不必天天测。如果体重快速下降、肌肉量持续减少，或多项指标同时变差，建议告诉子女并去医院检查。</div></div><div class="tip">⚠️ 手环测量是估算值，仅供参考；体检报告和医院测量更准确。</div>';};
+S['d_blood_data']=function(){var h=histGet('fg_bc_hist');var list;if(h.length){list=h.map(function(x,i){var d=new Date(x.t);return rowC((d.getMonth()+1)+'月'+d.getDate()+'日 '+hmOf(d),'尿酸'+(x.uricAcid==null?'--':x.uricAcid)+' · 胆固醇'+(x.tcho==null?'--':x.tcho)+' · 甘油三酯'+(x.tag==null?'--':x.tag),'green',"openHist('fg_bc_hist',"+i+')');}).join('');}else{list='<div class="tip">📊 还没有血液成分记录，去“血液成分”页测一次。</div>';}return head('血液成分 · 全部数据','📊')+'<div class="card"><h3>以往报告（点一条看详情）</h3>'+list+'</div><div class="tip">📊 保留最近7次报告；点任意一条可看完整数值。</div>';};
+S['d_about_blood']=function(){return head('了解血液成分','📖')+'<div class="card"><h3>各指标是什么</h3><div class="para">· 尿酸（150～430 微摩尔/升）：偏高可能诱发痛风，表现为关节突然红肿疼痛，大脚趾常见。<br/>· 总胆固醇（2.8～5.7 毫摩尔/升）：偏高会让血管慢慢变硬变窄，增加心梗、中风风险。<br/>· 甘油三酯（0.45～1.7 毫摩尔/升）：偏高与油腻饮食、甜食、喝酒关系大。<br/>· 高密度脂蛋白（≥1.0）：俗称“好胆固醇”，越高越好。<br/>· 低密度脂蛋白（≤3.4）：俗称“坏胆固醇”，偏高会促进血管斑块。</div></div><div class="card"><h3>老年人要注意什么</h3><div class="para">· 少喝浓肉汤、啤酒、含糖饮料；每天喝够水。<br/>· 饮食清淡，少油炸、少甜食，多吃蔬菜和粗粮。<br/>· 指标偏高时先调整生活方式，严重偏高要在医生指导下用药，不要自己乱吃药。</div></div><div class="card"><h3>手环测量的局限</h3><div class="para">手环是光学估算，受佩戴位置、皮肤状态影响，只能看趋势变化，不能代替医院抽血化验。指标异常时，以医院化验为准。</div></div><div class="tip">⚠️ 本页内容仅供参考，不能用于诊断；具体请听医生意见。</div>';};
+S['d_gsr_data']=function(){var h=histGet('fg_gsr_hist');var list;if(h.length){list=h.map(function(x,i){var d=new Date(x.t);return rowC((d.getMonth()+1)+'月'+d.getDate()+'日 '+hmOf(d),'含水'+(x.skinWater==null?'--':x.skinWater+'%')+' · 皮质醇'+(x.cortisol==null?'--':x.cortisol)+' · 情绪'+(x.emotion==null?'--':x.emotion),'green',"openHist('fg_gsr_hist',"+i+')');}).join('');}else{list='<div class="tip">📊 还没有皮肤电活动记录，去“皮肤电活动”页测一次。</div>';}return head('皮肤电活动 · 全部数据','📊')+'<div class="card"><h3>以往报告（点一条看详情）</h3>'+list+'</div><div class="tip">📊 保留最近7次报告；点任意一条可看完整数值。</div>';};
+S['d_about_gsr']=function(){return head('了解皮肤电活动','📖')+'<div class="card"><h3>皮电是什么</h3><div class="para">皮肤电活动（GSR）通过皮肤表面的微弱电信号，反映出汗、紧张程度和放松状态。人在紧张、焦虑时出汗增多、皮电变化加快；放松时趋于平稳。</div></div><div class="card"><h3>主要数值怎么看</h3><div class="para">· 皮肤含水量：与出汗和皮肤状态有关；注意皮电单项和微体检模式的数值口径不同，不能直接对比，建议只看趋势。<br/>· 情绪等级：越高越积极，越低越偏紧张低落。<br/>· 抑郁风险：低为正常；中表示需留意情绪状态；高建议关注并与家人沟通，必要时就医。<br/>· 交感神经活跃度：反映身体紧张程度，长期偏高说明压力大、休息不足。<br/>· 皮质醇：压力激素，长期偏高与睡眠差、焦虑相关。</div></div><div class="card"><h3>老年人要注意什么</h3><div class="para">情绪和睡眠对身体影响很大。如果多次测出情绪偏低、抑郁风险升高，或皮质醇持续偏高，不要慌，先观察几天是否作息不规律、情绪波动；持续不好的话，建议和子女聊聊，必要时去医院心理科或神经内科检查。</div></div><div class="card"><h3>怎么改善</h3><div class="para">规律作息、每天散步晒太阳、和家人聊天、听放松的音乐、深呼吸练习，都有助于降低压力水平。测量时手腕放松、保持不动，结果更稳定。</div></div><div class="tip">⚠️ 皮电数据仅供情绪和压力趋势参考，不能诊断抑郁等疾病；具体请听医生意见。</div>';};
+S['d_micro_data']=function(){var h=microHist();var list;if(h.length){list=h.map(function(x,i){var d=new Date(x.t);return rowC((d.getMonth()+1)+'月'+d.getDate()+'日 '+hmOf(d),'心率'+(x.hr==null?'--':x.hr)+' · 血氧'+(x.spo2==null?'--':x.spo2+'%')+' · 血压'+(x.bph==null?'--':x.bph+'/'+x.bpl),'green',"openHist('fg_micro_hist',"+i+')');}).join('');}else{list='<div class="tip">📊 还没有微体检记录，去“微体检报告”页测一次。</div>';}return head('微体检报告 · 全部数据','📊')+'<div class="card"><h3>以往报告（点一条看详情）</h3>'+list+'</div><div class="tip">📊 保留最近7次报告；点任意一条可看完整数值。</div>';};
+S['d_body']=function(){var bp=(D.bodyProg&&typeof D.bodyProg==='object')?D.bodyProg:{p:D.bodyProg};var leadTxt=(bp.lead==null)?'':(bp.lead==1?'<div class="tip" style="color:#E8402A">⚠️ 手指没有按住电极：请像量心电图那样，用手指按住指环侧面的金属触点，全程保持。</div>':'<div class="tip" style="color:#3FBF7F">✅ 电极已贴合，保持不动。</div>');var prog=(bp.p!=null&&bp.p>=0)?'<div class="card"><h3>测量中… '+bp.p+'%</h3><div class="tl"><div style="width:'+Math.max(4,bp.p)+'%;background:#4CA26F"></div></div>'+leadTxt+'</div>':'';var u=userInfo();var r=D.body||histGet('fg_body_hist')[0];var last=r?'<div class="card"><h3>最近一次结果</h3>'+rows([['⏰ 时间',hmOf(new Date(r.t))],['⚖️ BMI',(r.bmi==null?'--':r.bmi),bcl(r.bmi,18.5,23.9)],['体脂率',(r.bfr==null?'--':bclTxt(r.bfr,u.sex=='男'?15:20,u.sex=='男'?20:25,'%')),bcl(r.bfr,u.sex=='男'?15:20,u.sex=='男'?20:25)],['肌肉量',(r.muscle==null?'--':r.muscle+' 公斤'),'green'],['体水分',(r.water==null?'--':bclTxt(r.water,50,65,'%')),bcl(r.water,50,65)],['骨量',(r.bone==null?'--':r.bone+' 公斤'),bcl(r.bone,u.sex=='男'?2.5:1.5,u.sex=='男'?3.5:2.5)],['蛋白质',(r.protein==null?'--':r.protein+' 公斤'),'green'],['基础代谢',(r.bmr==null?'--':r.bmr+' 千卡'),'green']])+'</div>':'<div class="tip">还没有身体成分记录，点下面按钮开始。</div>';var ref='<div class="card"><h3>健康参考区间</h3>'+rows([['BMI','18.5~23.9 正常，≥24 偏重'],['体脂率（'+(u.sex=='男'?'男':'女')+'）',(u.sex=='男'?'15~20% 正常':'20~25% 正常，超过25% 偏高')],['体水分','50~65% 正常，低于50% 偏低'],['骨量（'+(u.sex=='男'?'男':'女')+'）',(u.sex=='男'?'约2.5~3.5 kg':'约1.5~2.5 kg')],['肌肉量/蛋白质','跟体重有关，看趋势'],['显示橙色','超出参考区间，注意观察','orange']])+'</div>';return head('身体成分','⚖️')+'<div class="card"><h3>这是什么</h3><div class="para">手环测量BMI、体脂率、肌肉量、水分、骨量和基础代谢，看变化趋势，不用每天测。<br/>测量时手环要戴紧，并像量心电图一样，用手指按住指环侧面的金属电极，全程保持不动——手指不按住会提示“测量失败-无结果”。</div></div>'+prog+last+ref+'<div class="bigbtn" onclick="startBody()">开始检测<small>手环戴好别动 · 约1~2分钟出结果</small></div>'+fr('d_body_data','📊','全部数据','以往报告')+fr('d_about_body','📖','了解身体成分','科普')+'<div class="tip">⚖️ 每周测一次对比变化就够用。</div>';};
+S['d_blood']=function(){var prog=(D.bcProg!=null&&D.bcProg>=0)?'<div class="card"><h3>测量中… '+D.bcProg+'%</h3><div class="tl"><div style="width:'+Math.max(4,D.bcProg)+'%;background:#7C6BF0"></div></div><div class="tip">⏱ 手环戴好，坐着别动，约1分钟。</div></div>':'';var r=D.bc||histGet('fg_bc_hist')[0];var last=r?'<div class="card"><h3>最近一次结果</h3>'+rows([['⏰ 时间',hmOf(new Date(r.t))],['🧪 尿酸',(r.uricAcid==null?'--':r.uricAcid+' 微摩尔/升'),bcl(r.uricAcid,150,430)],['总胆固醇',(r.tcho==null?'--':r.tcho+' 毫摩尔/升'),bcl(r.tcho,2.8,5.7)],['甘油三酯',(r.tag==null?'--':r.tag+' 毫摩尔/升'),bcl(r.tag,0.45,1.7)],['高密度脂蛋白',(r.hdl==null?'--':r.hdl+' 毫摩尔/升'),bcl(r.hdl,1.0,99)],['低密度脂蛋白',(r.ldl==null?'--':r.ldl+' 毫摩尔/升'),bcl(r.ldl,0,3.4)]])+'</div>':'<div class="tip">还没有血液成分记录，点下面按钮开始。</div>';var ref='<div class="card"><h3>健康参考区间</h3>'+rows([['尿酸','150~430 微摩尔/升'],['总胆固醇','2.8~5.7 毫摩尔/升'],['甘油三酯','0.45~1.7 毫摩尔/升'],['高密度脂蛋白','≥1.0 毫摩尔/升'],['低密度脂蛋白','≤3.4 毫摩尔/升'],['显示橙色','超出参考区间，注意观察','orange']])+'</div>';return head('血液成分','🧪')+'<div class="card"><h3>这是什么</h3><div class="para">手环光学测量尿酸、总胆固醇、甘油三酯和高/低密度脂蛋白，只看趋势变化，不能代替医院化验单。</div></div>'+prog+last+ref+'<div class="bigbtn" onclick="startBc()">开始检测<small>手环戴好别动 · 约1分钟出结果</small></div>'+fr('d_blood_data','📊','全部数据','以往报告')+fr('d_about_blood','📖','了解血液成分','科普')+'<div class="tip">🧪 数值仅供参考；感觉不舒服要及时就医。</div>';};
+S['d_sweat']=function(){var prog=(D.gsrProg!=null&&D.gsrProg>=0)?'<div class="card"><h3>测量中… '+D.gsrProg+'%</h3><div class="tl"><div style="width:'+Math.max(4,D.gsrProg)+'%;background:#52AEFF"></div></div><div class="tip">⏱ 手腕放松，别动，约1分钟。</div></div>':'';var r=D.gsr||histGet('fg_gsr_hist')[0];var last=r?'<div class="card"><h3>最近一次结果</h3>'+rows([['⏰ 时间',hmOf(new Date(r.t))],['💧 皮肤含水量',(r.skinWater==null?'--':r.skinWater+'%')],['😄 情绪等级',(r.emotion==null?'--':r.emotion),'green'],['抑郁症风险',(r.depression==null?'--':r.depression),(r.depression==='低'?'green':(r.depression==='中'?'orange':(r.depression==='高'?'red':'')))],['交感神经活跃度',(r.sympa==null?'--':r.sympa),'green'],['皮质醇',(r.cortisol==null?'--':r.cortisol+' 微克/升'),bcl(r.cortisol,0,200)]])+'</div>':'<div class="tip">还没有皮电记录，点下面按钮开始。</div>';var ref='<div class="card"><h3>健康参考区间</h3>'+rows([['皮肤含水量','微体检模式 40~70% 良好（皮电单项口径不同，仅看趋势）'],['情绪等级','-10~10，越高越积极'],['抑郁风险','低正常 / 中注意 / 高建议关注'],['交感神经活跃度','1~99，30~60 较平缓'],['皮质醇','0~200 微克/升 为参考范围'],['显示橙色','超出参考区间，注意观察','orange']])+'</div>';return head('皮肤电活动','💧')+'<div class="card"><h3>这是什么</h3><div class="para">皮电（GSR）测皮肤含水量、情绪状态和压力相关的皮质醇，属于放松/压力观察项。注意：皮电单项检测和微体检里的“皮肤含水量”是两种测量口径，数值不能直接对比，只看趋势。</div></div>'+prog+last+ref+'<div class="bigbtn" onclick="startGsr()">开始检测<small>手腕放松别动 · 约1分钟出结果</small></div>'+fr('d_gsr_data','📊','全部数据','以往报告')+fr('d_about_gsr','📖','了解皮肤电活动','科普')+'<div class="tip">💧 结果仅供观察参考，不能当医学诊断。</div>';};
+S['d_alerts']=function(){return head('告警记录','🚨')+'<div class="hero"><div class="v" style="font-size:40px">0<small> 本周告警</small></div><div class="lab">最近一次：11月1日 血氧 91%</div><div class="badge ok">当前一切正常</div></div><div class="card"><h3>历史记录</h3>'+rows([['11月1日 14:22','血氧 91%，已恢复','red'],['10月28日 08:10','手环离线38分钟','orange'],['10月25日 19:40','心率 122，已恢复','orange'],['10月20日 07:55','充电中，系统自动豁免']])+'</div><div class="card"><h3>给医生看</h3>'+rows([['导出时间','最近30天','green'],['导出内容','心率/血氧/睡眠/告警'],['方式','微信发送PDF']])+'</div><div class="tip">🚨 每条告警都会留下时间、数值、恢复时间，方便家人回忆，也方便医生判断。</div>';};
+S['d_doctor']=function(){return head('给医生看','🩺')+'<div class="hero"><div class="v" style="font-size:36px">健康报告</div><div class="lab">最近30天 · 心率/血氧/睡眠/告警</div><div class="badge ok">可导出</div></div><div class="card"><h3>包含内容</h3>'+rows([['实时指标','心率、血氧、血压'],['趋势图','最近7天/30天'],['睡眠','时长、深浅睡、清醒'],['告警','每次告警时间和恢复时间']])+'</div><div class="bigbtn" onclick="toast(\'演示版：正式版将生成PDF并可通过微信发送\')">生成PDF报告<small>正式版可微信发给医生</small></div><div class="tip">🩺 医院看病时，把报告给医生看，比口头描述清楚得多。</div>';};
+S['d_notify']=function(){return head('通知与日报','🔔')+'<div class="hero"><div class="v" style="font-size:36px">每日8点</div><div class="lab">给儿子和女儿发健康日报</div><div class="badge ok">已开启</div></div><div class="card"><h3>昨天的日报示例</h3>'+rows([['睡眠','7小时32分','green'],['平均血氧','98%','green'],['血氧最低','94%','orange'],['平均心率','76 次/分','green'],['今日运动','3433 步'],['微体检报告','昨天 08:10 已做 · 10项正常','green'],['告警','无','green']])+'</div><div class="card"><h3>即时提醒</h3>'+rows([['血氧低于90%持续5分钟','立即短信+电话'],['心率低于45或高于120持续10分钟','立即短信+电话'],['手环离线30分钟','短信提醒'],['呼吸困难风险（仅提醒子女）','立即短信+电话','red'],['充电中','自动豁免，不告警']])+'</div><div class="tip">🔔 第一版用短信；以后再做微信提醒，更省短信费。</div>';};
+S['d_sos']=function(){return '<div class="sospage"><div style="font-size:60px">🚨</div><div class="big">紧急呼救</div><div class="cnt" id="soscnt">5</div><div class="sub">即将拨打儿子电话<br/>并发送定位短信给儿子、女儿</div><div class="cancel" onclick="cancelSos()">取消呼救</div></div>';};
+function histGet(k){try{return JSON.parse(localStorage.getItem(k))||[];}catch(e){return [];}}
+function histPush(k,r,n){try{var h=histGet(k);h.unshift(JSON.parse(JSON.stringify(r)));if(h.length>n)h.length=n;localStorage.setItem(k,JSON.stringify(h));}catch(e){}}
+function setBcProg(p){D.bcProg=p;refresh();}
+function setBcResult(json){try{var r=JSON.parse(json);if(!r.err){r.t=Date.now();D.bc=r;histPush("fg_bc_hist",r,7);}}catch(e){}D.bcProg=null;refresh();}
+function setBodyProg(p){try{if(typeof p==='string'&&p.indexOf('{')==0){var o=JSON.parse(p);D.bodyProg=o.p;D.bodyLead=o.lead;}else{D.bodyProg=p;}}catch(e){D.bodyProg=p;}refresh();}
+function setBodyResult(json){try{var r=JSON.parse(json);if(!r.err){r.t=Date.now();D.body=r;histPush("fg_body_hist",r,7);}}catch(e){}D.bodyProg=null;refresh();}
+function setGsrProg(p){D.gsrProg=p;refresh();}
+function setGsrResult(json){try{var r=JSON.parse(json);if(!r.err){r.t=Date.now();D.gsr=r;histPush("fg_gsr_hist",r,7);}}catch(e){}D.gsrProg=null;refresh();}
+function startBc(){try{if(window.AndroidBridge&&AndroidBridge.bc){AndroidBridge.bc();toast("指令已发送，手环戴好别动，约1分钟");}else{toast("手环服务未就绪");}}catch(e){toast("启动失败");}}
+function startBody(){try{if(window.AndroidBridge&&AndroidBridge.body){AndroidBridge.body();toast("指令已发送，手环戴好别动，约1~2分钟");}else{toast("手环服务未就绪");}}catch(e){toast("启动失败");}}
+function startGsr(){try{if(window.AndroidBridge&&AndroidBridge.gsr){AndroidBridge.gsr();toast("指令已发送，手腕放松别动，约1分钟");}else{toast("手环服务未就绪");}}catch(e){toast("启动失败");}}
+function bclTxt(v,lo,hi,unit){if(v==null)return '--';if(v<lo)return v+unit+'（偏低）';if(v>hi)return v+unit+'（偏高）';return v+unit;}
+
+function bcl(v,lo,hi){if(v==null)return "";return (v>=lo&&v<=hi)?"green":"orange";}
+function rowC(l,v,c,oc){return '<div class="row"'+(oc?' onclick="'+oc+'" style="cursor:pointer"':'')+'><span class="k">'+l+'</span><span class="v '+(c||"")+'">'+v+'</span></div>';}
+var histSelK=null,histSelI=0;
+function openHist(k,i){histSelK=k;histSelI=i;show("d_hist_h");}
+var REFMICRO='<div class="card"><h3>健康参考区间</h3>'+rows([['心率','60~100 次/分'],['血氧','≥95%'],['血压','高压<130 且低压<85'],['血糖（餐前）','3.9~6.1 毫摩尔/升'],['体温','35.5~37.5 ℃'],['HRV','40 毫秒以上较理想'],['压力','0~59 较放松'],['显示橙色','超出参考区间，注意观察','orange']])+'</div>';
+S['d_hist_h']=function(){var h=histGet(histSelK);var r=h[histSelI];var u=userInfo();if(!r)return head('历史详情','📋')+'<div class="tip">记录不存在</div>';var d=new Date(r.t);var t=((d.getMonth()+1)+'月'+d.getDate()+'日 '+('0'+d.getHours()).slice(-2)+':'+('0'+d.getMinutes()).slice(-2));var name='';var body='';
+if(histSelK==='fg_bc_hist'){name='血液成分';body=rows([['🧪 尿酸',(r.uricAcid==null?'--':r.uricAcid+' 微摩尔/升'),bcl(r.uricAcid,150,430)],['总胆固醇',(r.tcho==null?'--':r.tcho+' 毫摩尔/升'),bcl(r.tcho,2.8,5.7)],['甘油三酯',(r.tag==null?'--':r.tag+' 毫摩尔/升'),bcl(r.tag,0.45,1.7)],['高密度脂蛋白',(r.hdl==null?'--':r.hdl+' 毫摩尔/升'),bcl(r.hdl,1.0,99)],['低密度脂蛋白',(r.ldl==null?'--':r.ldl+' 毫摩尔/升'),bcl(r.ldl,0,3.4)]]);}
+else if(histSelK==='fg_body_hist'){name='身体成分';body=rows([['⚖️ BMI',(r.bmi==null?'--':r.bmi),bcl(r.bmi,18.5,23.9)],['体脂率',(r.bfr==null?'--':r.bfr+'%'),bcl(r.bfr,u.sex=='男'?15:20,u.sex=='男'?20:30)],['肌肉量',(r.muscle==null?'--':r.muscle+' 公斤'),'green'],['体水分',(r.water==null?'--':r.water+'%'),bcl(r.water,u.sex=='男'?50:45,65)],['骨量',(r.bone==null?'--':r.bone+' 公斤'),bcl(r.bone,u.sex=='男'?2.5:1.5,u.sex=='男'?3.5:2.5)],['蛋白质',(r.protein==null?'--':r.protein+' 公斤'),'green'],['基础代谢',(r.bmr==null?'--':r.bmr+' 千卡'),'green']]);}
+else if(histSelK==='fg_gsr_hist'){name='皮肤电活动';body=rows([['💧 皮肤含水量',(r.skinWater==null?'--':r.skinWater+'%'),bcl(r.skinWater,40,70)],['😄 情绪等级',(r.emotion==null?'--':r.emotion),'green'],['抑郁症风险',(r.depression==null?'--':r.depression),(r.depression==='低'?'green':(r.depression==='中'?'orange':(r.depression==='高'?'red':'')))],['交感神经活跃度',(r.sympa==null?'--':r.sympa),'green'],['皮质醇',(r.cortisol==null?'--':r.cortisol+' 微克/升'),bcl(r.cortisol,0,200)]]);}
+else if(histSelK==='fg_micro_hist'){name='微体检报告';body=rows([['❤️ 心率',(r.hr==null?'--':r.hr+' 次/分'),bcl(r.hr,60,100)],['🩸 血氧',(r.spo2==null?'--':r.spo2+'%'),bcl(r.spo2,95,100)],['🧘 压力',(r.stress==null?'--':r.stress),bcl(r.stress,0,59)],['🍚 血糖',(r.sugarMmol==null?'--':r.sugarMmol+' 毫摩尔/升'),bcl(r.sugarMmol,3.9,6.1)],['🌡 体温',(r.temp==null?'--':r.temp+' ℃'),bcl(r.temp,35.5,37.5)],['🩸 血压',(r.bph==null?'--':r.bph+'/'+r.bpl),(r.bph<130&&r.bpl<85)?'green':'orange'],['📈 HRV',(r.hrv==null?'--':r.hrv+' 毫秒'),bcl(r.hrv,40,400)],['🧪 尿酸',(r.uricAcid==null?'--':r.uricAcid+' 微摩尔/升'),bcl(r.uricAcid,150,430)],['总胆固醇',(r.tcho==null?'--':r.tcho+' 毫摩尔/升'),bcl(r.tcho,2.8,5.7)],['甘油三酯',(r.tag==null?'--':r.tag+' 毫摩尔/升'),bcl(r.tag,0.45,1.7)],['高密度脂蛋白',(r.hdl==null?'--':r.hdl+' 毫摩尔/升'),bcl(r.hdl,1.0,99)],['低密度脂蛋白',(r.ldl==null?'--':r.ldl+' 毫摩尔/升'),bcl(r.ldl,0,3.4)],['😵 疲劳度',(r.fatigue==null?'--':r.fatigue)],['抑郁风险',(r.depression==null?'--':(r.depression===0||r.depression==='0'||r.depression==='低'?'低':(r.depression===1||r.depression==='1'||r.depression==='中'?'中':(r.depression===2||r.depression==='2'||r.depression==='高'?'高':r.depression))))],['皮质醇浓度',(r.cortisol==null?'--':r.cortisol+' 微克/升'),(r.cortisol==null?'':bcl(r.cortisol,0,200))]]);}
+else if(histSelK==='fg_ecg_hist'){name='心电图记录';body=(r.wave&&r.wave.length?'<div style="margin-bottom:8px">'+ecgWaveSvg(r.wave)+'</div>':'')+rows([['❤️ 平均心率',(r.hr==null?'--':r.hr+' 次/分'),bcl(r.hr,60,100)],['📈 HRV',(r.hrv==null?'--':r.hrv+' 毫秒'),bcl(r.hrv,40,400)],['🫁 呼吸率',(r.br==null?'--':r.br+' 次/分'),'green'],['QT间期',(r.qt==null?'--':r.qt)],['压力指数',(r.press==null?'--':r.press)],['疲劳指数',(r.fatig==null?'--':r.fatig)],['结果',(r.type==null?'--':r.type),(r.type&&r.type.indexOf('异常')>=0)?'orange':'green']]);}
+return head(t,'📋')+'<div class="card"><h3>'+name+'</h3>'+body+'</div><div class="tip">🧪 仅供趋势参考，不能当医学诊断。</div>';};
+try{if(window.AndroidBridge&&window.AndroidBridge.setFamily){window.AndroidBridge.setFamily(localStorage.getItem("fg_em1")||"",localStorage.getItem("fg_em2")||"");}}catch(e){}
+S['identity']=function(){return '<div class="rolehead"><div class="k">请选择今天的使用方式</div><div class="s">选错也没关系，设置里可以随时切换</div></div><div class="rolegrid"><div class="rolecard elder" onclick="chooseRole(\'elder\')"><div class="ico">🧑‍🦳</div><h3>老人端</h3><p>首页 · 功能 · 设置<br/>看自己的健康数据</p></div><div class="rolecard child" onclick="chooseRole(\'child\')"><div class="ico">👨‍👩‍👧</div><h3>子女端</h3><p>家人 · 设置<br/>看家人的状态和提醒</p></div></div>';};
+var ROLE='elder';
+function applyRole(){document.body.classList.remove('role-elder','role-child','role-none');document.body.classList.add('role-'+(ROLE||'none'));}
+function chooseRole(r){ROLE=r;localStorage.setItem('fg_role',r);applyRole();tab(r==='child'?'family':'home');toast(r==='child'?'已切换到子女端':'已切换到老人端');}
+function switchRole(){try{pageRoleDialog();}catch(e){ROLE='';localStorage.removeItem('fg_role');applyRole();stack=['identity'];show('identity',false);}}
+// 界面模式切换：只换本机界面（老人界面/子女界面），不影响数据采集与云端同步
+function pageRoleDialog(){
+  var d=document.createElement('div');
+  d.style.cssText='position:fixed;left:0;top:0;right:0;bottom:0;background:rgba(0,0,0,.45);z-index:999;display:flex;align-items:center;justify-content:center;';
+  var inner=document.createElement('div');
+  inner.style.cssText='background:#fff;border-radius:18px;padding:20px;width:82%;max-width:340px;';
+  inner.innerHTML='<div style="font-size:17px;font-weight:800;color:#4A3428;margin-bottom:6px;">切换界面模式</div>'
+   +'<div style="font-size:12px;color:#8A6A55;margin-bottom:14px;">只换手机上的界面，不影响数据采集和云端同步</div>'
+   +'<div class="mbtn" style="margin:0 0 10px;" id="pr_elder">老人界面（首页/功能/设置，可手动监测）</div>'
+   +'<div class="mbtn" style="margin:0;background:#F3EDE7;color:#4A3428;" id="pr_child">子女界面（家人/设置）</div>';
+  d.appendChild(inner);document.body.appendChild(d);
+  document.getElementById('pr_elder').onclick=function(){chooseRole('elder');d.remove();};
+  document.getElementById('pr_child').onclick=function(){chooseRole('child');d.remove();};
+}
+applyRole();
+if(ROLE){tab(ROLE==='child'?'family':'home');}else{stack=['identity'];show('identity',false);}
+</script></body></html>
+

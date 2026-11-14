@@ -1,0 +1,42 @@
+apply plugin: 'com.android.application'
+
+android {
+    namespace 'com.family.guardian'
+    compileSdkVersion 34
+    buildToolsVersion '34.0.0'
+
+    defaultConfig {
+        applicationId 'com.family.guardian'
+        minSdkVersion 26
+        targetSdkVersion 29
+        versionCode 16
+        versionName '1.15'
+    }
+
+    buildTypes {
+        debug {
+            // 使用 Android Studio 或 gradlew assembleDebug 默认 debug 签名
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_17
+        targetCompatibility JavaVersion.VERSION_17
+    }
+}
+
+repositories {
+    flatDir { dirs 'libs' }
+    maven { url 'https://maven.aliyun.com/nexus/content/groups/public/' }
+    google()
+    mavenCentral()
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+    implementation 'androidx.localbroadcastmanager:localbroadcastmanager:1.1.0'
+    implementation 'com.volcengine:ve-tos-java-sdk:2.9.4'
+    implementation 'no.nordicsemi.android:mcumgr-core:2.7.4'
+    implementation 'no.nordicsemi.android:mcumgr-ble:2.7.4'
+    implementation 'no.nordicsemi.android.support.v18:scanner:1.4.2'
+}
